@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <string.h>
+
+int isPrime(int p)
+{
+    if(p<2 || (p>2 && p%2==0))
+        return 0;
+    int d=2;
+    while(d*d<=p)
+    {
+        if(p%d==0) return 0;
+        d++;
+    }
+    return 1;
+}
+
+int isDecreasing(int a, int b){
+    if(a>=b)
+        return 1;
+    return 0;
+}
+
+void a()
+{
+    int n, counter=0, p=2;
+    printf ("n= ");
+    scanf ("%d", &n);
+    while(counter<n){
+        if(isPrime(p) && isPrime(p+2))
+        {
+            counter+=1;
+            printf("%d and %d   ", p, p+2);
+        }
+        p+=1;
+    }
+    printf("\n");
+}
+
+void b(){
+    int array[100], length = 0;
+    int n;
+    printf("n=");
+    scanf("%d", &n);
+    printf ("array = ");
+    for (int i = 0; i < n; i++)
+    {
+        scanf ("%d", &array[i]);
+        length += 1;
+    }
+
+    int searched_length = 1, current_length = 1, searched_array[100] = {0}, current_array[100] = {0};
+    for (int i = 0; i < length-1; i++)
+    {
+        if (isDecreasing(array[i], array[i + 1])==1)
+        {
+            current_array[current_length - 1] = array[i];
+            current_array[current_length] = array[i + 1];
+            current_length += 1;
+            if (current_length > searched_length)
+            {
+                for (int j = 0; j < current_length; j++)
+                    searched_array[j] = current_array[j];
+                searched_length = current_length;
+            }
+        }
+        else
+        {
+            for (int j = 0; j < 100; j++)
+                current_array[j] = 0;
+            current_length = 1;
+        }
+    }
+
+    printf("length is: %d\nthe searched array is: ", searched_length);
+    for (int i = 0; i < searched_length-1; i++)
+        printf ("%d,", searched_array[i]);
+    printf("%d", searched_array[searched_length-1]);
+}
+
+int main() {
+    a();
+    b();
+    return 0;
+}

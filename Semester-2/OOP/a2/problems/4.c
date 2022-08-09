@@ -1,0 +1,108 @@
+#include <stdio.h>
+
+int isPrime(int n){
+    if(n%2==0 && n>2 || n<=1)
+        return 0;
+    for(int i=2; i*i<=n; i++)
+        if(n%i == 0)
+            return 0;
+    return 1;
+}
+
+int differenceIsPrime(int a, int b){
+    int maxim=a, minim=b;
+    if(b>a) {
+        maxim = b;
+        minim = a;
+    }
+    if(isPrime(maxim - minim)==1)
+        return 1;
+    return 0;
+}
+
+double getSquareRoot(int n, int p){
+    int start=0, end=n, mid=0;
+    double result;
+    while(start <= end){
+        mid = (start + end)/2;
+        if(mid * mid == n)
+            return mid;
+        if (mid * mid < n) {
+            result = start;
+            start = mid + 1;
+        }
+        else {
+            end = mid - 1;
+        }
+    }
+    double increment = 0.1;
+    for (int i = 0; i < p; i++) {
+        while (result * result <= n) {
+            result += increment;
+        }
+        result = result - increment;
+        increment = increment / 10;
+    }
+    return result;
+}
+
+void a(){
+    int n, p;
+    printf("n=");
+    scanf("%d", &n);
+    if(n<0) {
+        printf("no negative numbers allowed!\n");
+        return;
+    }
+    printf("precision=");
+    scanf("%d", &p);
+    printf("%f", getSquareRoot(n, p));
+    printf("\n");
+}
+
+void b(){
+    int array[100], length = 0;
+    int n;
+    printf("n=");
+    scanf("%d", &n);
+    printf ("array = ");
+    for (int i = 0; i < n; i++)
+    {
+        scanf ("%d", &array[i]);
+        length += 1;
+    }
+
+    int searched_length = 1, current_length = 1, searched_array[100] = {0}, current_array[100] = {0};
+    for (int i = 0; i < length-1; i++)
+    {
+        if (differenceIsPrime(array[i], array[i + 1])==1)
+        {
+            current_array[current_length - 1] = array[i];
+            current_array[current_length] = array[i + 1];
+            current_length += 1;
+            if (current_length > searched_length)
+            {
+                for (int j = 0; j < current_length; j++)
+                    searched_array[j] = current_array[j];
+                searched_length = current_length;
+            }
+        }
+        else
+        {
+            for (int j = 0; j < 100; j++)
+                current_array[j] = 0;
+            current_length = 1;
+        }
+    }
+
+    printf("length is: %d\nthe searched array is: ", searched_length);
+    for (int i = 0; i < searched_length-1; i++)
+        printf ("%d,", searched_array[i]);
+    printf("%d", searched_array[searched_length-1]);
+}
+
+//int main() {
+//    a();
+//    b();
+//    return 0;
+//}
