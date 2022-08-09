@@ -6,7 +6,6 @@ Repository* createRepo()
     if (repository == NULL)
         return NULL;
     repository->data = createDynamicArray(CAPACITY, (DestroyElementFunctionType) &destroyMedication);
-    repository->length=0;
     return repository;
 }
 
@@ -21,7 +20,6 @@ Repository* createCopyRepo(Repository* repo)
         Medication *m = createCopyMedication(med);
         addEntity(repository, m);
     }
-    repository->length=getRepoLength(repo);
     return repository;
 }
 
@@ -35,6 +33,8 @@ void destroyRepo(Repository * repository)
 
 int updateEntity(Repository *repository, Medication* entity)
 {
+    if (repository == NULL || entity == NULL)
+        return -1;
     int found = 0;
     Medication * med_updated = (Medication*) entity;
     Medication * med_before;
@@ -62,21 +62,25 @@ int addEntity(Repository * repository, Medication* entity)
 
     if (repository == NULL || entity == NULL)
         return -1;
-
-    add(repository->data, entity);
-    repository->length++;
+    Medication* med = findByNameConcentration(repository, getName(entity), getConcentration(entity));
+    if(med == NULL)
+        add(repository->data, entity);
+    else
+    {
+        med->quantity += getQuantity(entity);
+        med->price = getPrice(entity);
+    }
     return 0;
 }
 
 int deleteEntity(Repository *repository, Medication* entity)
 {
-    if(repository == NULL)
+    if(repository == NULL || entity == NULL)
         return -1;
     for(int i=0; i<getLength(repository->data); i++)
         if(strcmp(getName(getEntityOnPos(repository, i)), getName(entity))==0 && getConcentration(getEntityOnPos(repository, i))==getConcentration(entity))
         {
             delete(repository->data, i);
-            repository->length--;
             return 0;
         }
     return -1;
@@ -103,7 +107,7 @@ Medication * findByNameConcentration(Repository * repo, char* name, int concentr
         return NULL;
     }
     for (int i = 0; i < getLength(repo->data); i++) {
-        Medication * m = get(repo->data, i);
+        Medication * m = (Medication*) get(repo->data, i);
         if (strcmp(getName(m), name) == 0 && getConcentration(m)==concentration) {
             return m;
         }

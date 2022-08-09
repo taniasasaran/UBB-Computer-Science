@@ -1,18 +1,11 @@
 #include "Medication.h"
 
-void copy_medication(Medication *destination_med, Medication *source_med)
-{
-    strcpy(destination_med->name, getName(source_med));
-    destination_med->concentration = getConcentration(source_med);
-    destination_med->quantity = getQuantity(source_med);
-    destination_med->price = getPrice(source_med);
-}
-
 Medication * createMedication(char* name, int concentration, int quantity, int price)
 {
-    Medication* m = malloc(sizeof(Medication));
+    Medication* m = (Medication*)malloc(sizeof(Medication));
+    if (m == NULL)
+        return NULL;
     strcpy(m->name, name);
-
     m->quantity = quantity;
     m->concentration = concentration;
     m->price = price;
@@ -33,6 +26,14 @@ void destroyMedication(Medication * m) // the memory is freed
     if(m == NULL)
         return;
     free(m);
+}
+
+void copyMedication(Medication* destination_med, Medication* source_med)
+{
+    strcpy(destination_med->name, getName(source_med));
+    destination_med->concentration = getConcentration(source_med);
+    destination_med->quantity = getQuantity(source_med);
+    destination_med->price = getPrice(source_med);
 }
 
 char* getName(Medication * m)

@@ -29,14 +29,47 @@ void populateRepo(Service* s)
     addEntity(s->repository, m1);
     Medication *m2 = createMedication("algocalmin", 10, 800, 10);
     addEntity(s->repository, m2);
-    Medication *m3 = createMedication("ibup", 400, 5000, 9);
+    Medication *m3 = createMedication("ibuprofen", 40, 5000, 9);
     addEntity(s->repository, m3);
+    Medication* m4 = createMedication("aspenter", 15, 300, 40);
+    addEntity(s->repository, m4);
+    Medication* m5 = createMedication("strepsils", 8, 10000, 5);
+    addEntity(s->repository, m5);
+    Medication* m6 = createMedication("triferment", 20, 600, 10);
+    addEntity(s->repository, m6);
+    Medication* m7 = createMedication("antinevralgic", 10, 5000, 8);
+    addEntity(s->repository, m7);
+    Medication* m8 = createMedication("paduden", 60, 100, 18);
+    addEntity(s->repository, m8);
+    Medication* m9 = createMedication("paduden", 30, 100, 10);
+    addEntity(s->repository, m9);
+    Medication* m10 = createMedication("memoplus", 80, 20, 50);
+    addEntity(s->repository, m10);
 }
 
-void boblesort_quantity(Repository *repository)
+int isCharGreater(char* a, char* b)
+{
+    return strcmp(a, b)>0;
+}
+
+int isCharSmaller(char* a, char* b)
+{
+    return strcmp(a, b) < 0;
+}
+
+int isNumberGreater(int a, int b)
+{
+    return a > b;
+}
+
+int isNumberSmaller(int a, int b)
+{
+    return a < b;
+}
+
+void boblesortQuantity(Repository *repository, ComparisonIntFunction cmpInt)
 {
     int sorted = 0;
-    Medication * aux_med;
     while(sorted == 0)
     {
         sorted = 1;
@@ -44,22 +77,22 @@ void boblesort_quantity(Repository *repository)
         {
             for(int j=i+1; j<getLength(repository->data); j++)
             {
-                if(((Medication *)getEntityOnPos(repository, i))->quantity > ((Medication *) getEntityOnPos(repository, j))->quantity)
+                if(cmpInt(getQuantity(((Medication *)getEntityOnPos(repository, i))), getQuantity(((Medication *) getEntityOnPos(repository, j))))>0)
                 {
-                    aux_med = createCopyMedication((Medication *)(getEntityOnPos(repository, i)));
-                    copy_medication(getEntityOnPos(repository, i), getEntityOnPos(repository, j));
-                    copy_medication(getEntityOnPos(repository, j), aux_med);
+                    Medication* aux_med = createCopyMedication((Medication *)(getEntityOnPos(repository, i)));
+                    copyMedication(getEntityOnPos(repository, i), getEntityOnPos(repository, j));
+                    copyMedication(getEntityOnPos(repository, j), aux_med);
                     sorted = 0;
+                    destroyMedication(aux_med);
                 }
             }
         }
     }
 }
 
-void boblesort_name(Repository *repository)
+void boblesortName(Repository *repository, ComparisonCharFunction cmpChar)
 {
     int sorted = 0;
-    Medication * aux_med;
     while(sorted == 0)
     {
         sorted = 1;
@@ -67,79 +100,127 @@ void boblesort_name(Repository *repository)
         {
             for(int j=i+1; j<getLength(repository->data); j++)
             {
-                if(strcmp(((Medication *)getEntityOnPos(repository, i))->name, ((Medication *)getEntityOnPos(repository, j))->name) >0)
+                if(cmpChar(getName((Medication *)getEntityOnPos(repository, i)), getName((Medication *)getEntityOnPos(repository, j)))>0)
                 {
-                    aux_med = createCopyMedication((Medication *)getEntityOnPos(repository, i));
-                    copy_medication((Medication *)getEntityOnPos(repository, i), (Medication *)getEntityOnPos(repository, j));
-                    copy_medication((Medication *)getEntityOnPos(repository, j), aux_med);
+                    Medication* aux_med = createCopyMedication((Medication *)getEntityOnPos(repository, i));
+                    copyMedication((Medication *)getEntityOnPos(repository, i), (Medication *)getEntityOnPos(repository, j));
+                    copyMedication((Medication *)getEntityOnPos(repository, j), aux_med);
                     sorted = 0;
+                    destroyMedication(aux_med);
                 }
             }
         }
     }
 }
 
-int addMedicineServ(Service* s, char* name, int concentration, int quantity, int price)
+int addEntityServ(Service* s, char* name, int concentration, int quantity, int price)
 {
     Medication * m = createMedication(name, concentration, quantity, price);
     Repository *repo = createCopyRepo(s->repository);
-    add(s->UndoStack, repo);
-    empty(s->RedoStack);
-    return addEntity(s->repository, m);
+    int result = addEntity(s->repository, m);
+    if (result == 0) {
+        add(s->UndoStack, repo);
+        if (s->RedoStack->length != 0)
+            empty(s->RedoStack);
+    }
+    if (result == -1) {
+        destroyRepo(repo);
+        destroyMedication(m);
+    }
+    return result;
 }
 
-int deleteMedicineServ(Service* s, char* name, int c)
+int deleteEntityServ(Service* s, char* name, int c)
 {
     Repository *repo = createCopyRepo(s->repository);
-    add(s->UndoStack, repo);
-    empty(s->RedoStack);
-    return deleteEntity(s->repository, findByNameConcentration(s->repository, name, c));
+    int result = deleteEntity(s->repository, findByNameConcentration(s->repository, name, c));
+    if (result == 0) {
+        add(s->UndoStack, repo);
+        if (s->RedoStack->length != 0)
+            empty(s->RedoStack);
+    }
+    if (result == -1) {
+        destroyRepo(repo);
+    }
+    return result;
 }
 
 
-int updateMedicineServ(Service* s, char* name, int concentration, int quantity, int price)
+int updateEntityServ(Service* s, char* name, int concentration, int quantity, int price)
 {
-    Medication * new_m = createMedication(name, concentration, quantity, price);
+    Medication *new_m = createMedication(name, concentration, quantity, price);
     Repository *repo = createCopyRepo(s->repository);
-    add(s->UndoStack, repo);
-    empty(s->RedoStack);
-    return updateEntity(s->repository, new_m);
+    int result = updateEntity(s->repository, new_m);
+    if (result == 0) {
+        add(s->UndoStack, repo);
+        if (s->RedoStack->length != 0)
+            empty(s->RedoStack);
+    }
+    if (result == -1) {
+        destroyRepo(repo);
+        destroyMedication(new_m);
+    }
+    return result;
 }
 
 // this function filters the data in repo and keeps only the products which contain the given "string" in the name
-void choose_medicine_given_string(Service *service, Repository *secondary_repository, char string[50])
+void chooseMedicineGivenString(Service *service, Repository *secondary_repository, char string[50])
 {
-    secondary_repository->data->length = 0;
-    secondary_repository->length = 0;
+    empty(secondary_repository->data);
     for(int i=0; i<getLength(service->repository->data); i++)
     {
-        if(strstr(((Medication *)getEntityOnPos(service->repository, i))->name, string) || strcmp(string, "0")==0 )
+        if(strstr(getName((Medication *)getEntityOnPos(service->repository, i)), string) || strcmp(string, "-")==0 )
         {
             Medication *medicine = createMedication("", 0, 0, 0);
-            copy_medication(medicine, ((Medication *)getEntityOnPos(service->repository, i)));
+            copyMedication(medicine, ((Medication *)getEntityOnPos(service->repository, i)));
             addEntity(secondary_repository, medicine);
         }
     }
 }
 
-void choose_medicine_given_string_sorted(Service *service, Repository *secondary_repository, char string[50])
+void chooseMedicineOddPrice(Service* service, Repository* secondary_repository)
 {
-    choose_medicine_given_string(service, secondary_repository, string);
-    boblesort_name(secondary_repository);
-}
-
-void choose_medicine_less_than_X_items(Service *service, Repository *secondary_repository, int X)
-{
-    secondary_repository->data->length = 0;
-    secondary_repository->length = 0;
-    for(int i=0; i<getLength(service->repository->data); i++) {
-        if(((Medication *)getEntityOnPos(service->repository, i))->quantity < X )
+    empty(secondary_repository->data);
+    for (int i = 0; i < getLength(service->repository->data); i++)
+    {
+        if (getPrice((Medication*)getEntityOnPos(service->repository, i))%2==1)
         {
-            Medication *medicine = createMedication("", 0, 0, 0);
-            copy_medication(medicine, ((Medication *)getEntityOnPos(service->repository, i)));
+            Medication* medicine = createMedication("", 0, 0, 0);
+            copyMedication(medicine, ((Medication*)getEntityOnPos(service->repository, i)));
             addEntity(secondary_repository, medicine);
         }
     }
+}
+
+void chooseMedicineLessThanXItems(Service* service, Repository* secondary_repository, int X) {
+    empty(secondary_repository->data);
+    for (int i = 0; i < getLength(service->repository->data); i++) {
+        if (((Medication*)getEntityOnPos(service->repository, i))->quantity < X)
+        {
+            Medication* medicine = createMedication("", 0, 0, 0);
+            copyMedication(medicine, ((Medication*)getEntityOnPos(service->repository, i)));
+            addEntity(secondary_repository, medicine);
+        }
+    }
+}
+
+
+void chooseMedicineGivenStringSorted(Service *service, Repository *secondary_repository, char string[50], ComparisonCharFunction cmpChar)
+{
+    chooseMedicineGivenString(service, secondary_repository, string);
+    boblesortName(secondary_repository, cmpChar);
+}
+
+void chooseMedicineOddPriceSorted(Service* service, Repository* secondary_repository, ComparisonCharFunction cmpChar)
+{
+    chooseMedicineOddPrice(service, secondary_repository);
+    boblesortName(secondary_repository, cmpChar);
+}
+
+void chooseMedicineLessThanXItemsSorted(Service* service, Repository* secondary_repository, int X, ComparisonIntFunction cmpInt)
+{
+    chooseMedicineLessThanXItems(service, secondary_repository, X);
+    boblesortQuantity(secondary_repository, cmpInt);
 }
 
 // UndoStack: init, change1, change2, change3, change4
@@ -164,7 +245,6 @@ int undo(Service* s)
     if (repo == NULL)
         return -1;
     s->repository = repo;
-//    add(s->RedoStack, repo);
     pop(s->UndoStack);
     return 0;
 }
@@ -182,11 +262,9 @@ int redo(Service* s)
     if (repo == NULL)
         return -1;
     s->repository = repo;
-//    add(s->UndoStack, repo);
     pop(s->RedoStack);
     return 0;
 }
-
 
 Repository * getRepo(Service* s)
 {

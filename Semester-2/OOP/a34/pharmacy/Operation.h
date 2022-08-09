@@ -1,22 +1,12 @@
 #pragma once
 #include "Medication.h"
-
 #include <stdlib.h>
-// version 2 - operation contains functions (function pointers) for 
-// the undo and redo functions, as well as the parameters for them
-//typedef int (*undoPtrFct)(void*, void*);
-//
-//typedef struct
-//{
-//	void* obj;
-//	undoPtrFct undoFct, redoFct;
-//} Operation;
-
 
 typedef enum {
 	ADD, 
 	DELETE,
-	UPDATE
+	UPDATE,
+//	NOTHING=NULL
 } opType;
 
 typedef struct {
@@ -24,8 +14,30 @@ typedef struct {
 	Medication * m;
 } Operation;
 
+/// <summary>
+/// Creates an operation.
+/// </summary>
+/// <param name="type">opType, the type of the operation.</param>
+/// <param name="m">pointer to the medication operated on.</param>
+/// <returns>A pointer to the created operation.</returns>
 Operation* createOperation(opType type, Medication * m);
+
+/// <summary>
+/// Destroys the operation.
+/// </summary>
+/// <param name="o">The operation to be destroyed.</param>
 void destroyOperation(Operation* o);
 
+/// <summary>
+/// Returns the type of the operation.
+/// </summary>
+/// <param name="o">The operation.</param>
+/// <returns>opType, the type of the operation.</returns>
 opType getOpType(Operation* o);
+
+/// <summary>
+/// Returns the medication of the operation.
+/// </summary>
+/// <param name="o">The operation.</param>
+/// <returns>pointer to Medication, the medication operated on.</returns>
 Medication * getOpObject(Operation* o);

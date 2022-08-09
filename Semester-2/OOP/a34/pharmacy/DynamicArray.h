@@ -29,7 +29,6 @@ DynamicArray* createDynamicArray(int capacity, DestroyElementFunctionType destro
 /// Destroys the dynamic array.
 /// </summary>
 /// <param name="arr">The dynamic array to be destroyed.</param>
-/// <returns>A pointer the the created dynamic array.</returns>
 void destroy(DynamicArray*);
 
 /// <summary>
@@ -44,10 +43,18 @@ void add(DynamicArray*, TElement);
 /// </summary>
 /// <param name="arr">The dynamic array.</param>
 /// <param name="pos">The position from which the element must be deleted. The position must be valid.</param>
-void delete(DynamicArray*, int pos);
+void delete(DynamicArray* arr, int pos);
 
-void empty(DynamicArray*);
+/// <summary>
+/// Deletes all elements from a dynamic array.
+/// </summary>
+/// <param name="arr">The dynamic array.</param>
+void empty(DynamicArray* arr);
 
+/// <summary>
+/// Erases the last element from the dynamic array, without destroying it.
+/// </summary>
+/// <param name="arr">The dynamic array.</param>
 void pop(DynamicArray* arr);
 
 /// <summary>

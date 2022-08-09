@@ -2,7 +2,9 @@
 
 
 Operation* createOperation(opType type, Medication * m) {
-	Operation* op = malloc(sizeof(Operation));
+	Operation* op = (Operation*) malloc(sizeof(Operation));
+	if (op == NULL)
+		return NULL;
 	op->type = type;
 
 	Medication * copyOfM = createCopyMedication(m);

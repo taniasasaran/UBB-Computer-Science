@@ -98,7 +98,7 @@ void pop(DynamicArray* arr)
         return;
     arr->length--;
     arr->elems[arr->length] = NULL;
-
+    
 }
 
 int getLength(DynamicArray* arr)
