@@ -1,12 +1,8 @@
-//
-// Created by TANIA on 3/19/2022.
-//
-
 #include "ui.h"
 
 int main()
 {
-    std::string filename = R"(C:\Users\TANIA\CLionProjects\GitHub\a8-9-taniasasaran\example.txt)";
+    std::string filename = R"(D:\Projects\UBB-Computer-Science\Semester-2\OOP\a8-9\LocalMovieDatabase_II\example.txt)";
     Repository repository = Repository(filename);
     Service service = Service(repository);
     UI ui = UI(service);

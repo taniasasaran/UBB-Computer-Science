@@ -100,7 +100,7 @@ void Repository::writeToFile()
     if (!file.is_open())
         throw Exception("The file could not be opened!");
 
-    for (auto m : this->data)
+    for (auto const &m : this->data)
     {
         file << m;
     }
