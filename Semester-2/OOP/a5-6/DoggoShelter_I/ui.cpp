@@ -68,7 +68,8 @@ void UI::openLink(Dog dog){
 
 
 void UI::startUI() {
-    cout << "\n------------Welcome to IMDB!------------\n\n";
+    cout << "\n------------Welcome to PetShelter!------------\n";
+    cout << "          Keep calm and adopt a pet!   \n\n";
     cout << "What are you?\n1.THE Boss\n2.Just a dog person\n";
     int command, admin_command, user_command, user_smaller_command;
     bool result;
