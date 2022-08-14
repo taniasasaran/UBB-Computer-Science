@@ -1,0 +1,84 @@
+     1                                  bits 32 ; assembling for the 32 bits architecture
+     2                                  
+     3                                  ; declare the EntryPoint (a label defining the very first instruction of the program)
+     4                                  global start        
+     5                                  
+     6                                  ; declare external functions needed by our program
+     7                                  extern exit, printf               ; tell nasm that exit exists even if we won't be defining it
+     8                                  import exit msvcrt.dll    ; exit is a function that ends the calling process. It is defined in msvcrt.dll
+     9                                                            ; msvcrt.dll contains exit, printf and all the other important C-runtime specific functions
+    10                                  import printf msvcrt.dll
+    11                                       
+    12                                                            
+    13                                  ; our data is declared here (the variables needed by our program)
+    14                                  segment data use32 class=data
+    15 00000000 313031303031313162-         a db '10100111b', '01100011b', '110b', '101011b'
+    15 00000009 303131303030313162-
+    15 00000012 313130623130313031-
+    15 0000001B 3162               
+    16                                      len_a equ $-a
+    17 0000001D 256300                      format db '%c', 0
+    18 00000020 2C2000                      added_string db ', ', 0
+    19 00000023 257300                      added_string_format db '%s', 0
+    20 00000026 <res 00000004>              ecx_copy resd 1
+    21 0000002A <res 00000004>              eax_copy resd 1
+    22                                  
+    23                                      ;A string containing n binary representations on 8 bits is given as a character string.
+    24                                  ;Obtain the string containing the numbers corresponding to the given binary representations.
+    25                                  ;Example:
+    26                                  ;Given: '10100111b', '01100011b', '110b', '101011b'
+    27                                  ;Obtain: 10100111b, 01100011b, 110b, 101011b
+    28                                      
+    29                                  ; our code starts here
+    30                                  segment code use32 public class=code
+    31                                      compare_b:
+    32 00000000 8B442404                        mov eax, [esp+4]
+    33 00000004 3C62                            cmp al, 'b'
+    34 00000006 7404                            je gasit
+    35 00000008 6A00                            push dword 0
+    36 0000000A EB02                            jmp sfarsit_cmp
+    37                                          gasit: 
+    38 0000000C 6A01                            push dword 1
+    39                                          sfarsit_cmp:
+    40 0000000E EB37                            jmp next_istr
+    41                                  
+    42                                      start:
+    43 00000010 B91D000000                      mov ecx, len_a   ;ecx= length of the array (in bytes)
+    44 00000015 E35C                            jecxz final
+    45 00000017 BE[00000000]                    mov esi, a  ;esi= address of the array
+    46                                          read_loop:
+    47 0000001C 890D[26000000]                      mov [ecx_copy], ecx  ;save ecx in memory
+    48 00000022 B800000000                          mov eax, 0
+    49 00000027 AC                                  lodsb  ;al='1'       ;eax= 0000 00xy where xy=ascii code of the character 0, 1 or b
+    50 00000028 A3[2A000000]                        mov [eax_copy], eax  ;save eax in memory
+    51                                              
+    52 0000002D 50                                  push eax
+    53 0000002E 68[1D000000]                        push format
+    54 00000033 FF15[00000000]                      call [printf]    ;print the character '0', '1', 'b'
+    55 00000039 83C408                              add esp, 4*2
+    56                                              
+    57 0000003C A1[2A000000]                        mov eax, [eax_copy]  ;restore the value of eax
+    58 00000041 50                                  push eax
+    59 00000042 E8B9FFFFFF                          call compare_b  ; call compare_b    a function that compares characters with 'b' 1 ont he stack if equal, else 0 on the stack (dword)
+    60                                              next_istr:
+    61 00000047 58                                  pop eax   ;eax=1 if the character was b, else 0
+    62 00000048 83F800                              cmp eax, 0  
+    63 0000004B 7502                                jne print_string   ;if eax=1, print ', '
+    64 0000004D EB1C                                jmp sfarsit  ;if eax=0, go to the end of the loop 
+    65                                              
+    66                                              print_string:
+    67 0000004F 833D[26000000]01                    cmp dword[ecx_copy], 1
+    68 00000056 7413                                je sfarsit   ;if ecx_copy=1(aka it was the last element), go to the end of the loop
+    69 00000058 68[20000000]                        push added_string    ;else, print ', '
+    70 0000005D 68[23000000]                        push added_string_format
+    71 00000062 FF15[00000000]                      call [printf]
+    72 00000068 83C408                              add esp, 4*2
+    73                                              
+    74                                              sfarsit:
+    75 0000006B 8B0D[26000000]                      mov ecx, [ecx_copy] ;restore the value of ecx
+    76 00000071 E2A9                                loop read_loop      ;compare ecx with 0 and loop again if ecx!=0
+    77                                          
+    78                                          final: 
+    79                                          ; exit(0)
+    80 00000073 6A00                            push    dword 0      ; push the parameter for exit onto the stack
+    81 00000075 FF15[00000000]                  call    [exit]       ; call exit to terminate the program

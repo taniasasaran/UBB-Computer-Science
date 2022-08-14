@@ -1,0 +1,3 @@
+alink lab11.obj lab11_proc.obj -oPE -subsys console -entry start
+
+nasm -fobj lab11_proc.asm
