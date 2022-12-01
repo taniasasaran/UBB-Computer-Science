@@ -1,0 +1,10 @@
+(defun preorder (l)
+    (cond
+        ((null l) l)
+        ((listp (car l)) (append (preorder (car l)) (preorder (cdr l)))) 
+        (t (cons (car l) (preorder (cdr l))))
+    )
+)
+
+
+(print (preorder '(A (B) (C (D) (E)))))
