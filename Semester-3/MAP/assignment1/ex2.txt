@@ -1,0 +1,4 @@
+2. Intr-un depozit de alimente exista 
+sare, zahar si faina. Sa se afiseze 
+produsele cu pretul mai mare decit 
+20Ron/kg.
