@@ -1,0 +1,2 @@
+1. The number of bases of the vector space Z2^5 over Z2 is 9999360 
+2. To generate the bases of Z2^n over Z2, provide an integer between 1 and 4

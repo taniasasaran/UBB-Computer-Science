@@ -1,0 +1,4 @@
+1. The number of partitions on a set A with 2 elements is 2 
+2. Using the notation deltaA = [(a1, a1),(a2, a2),...,(a2, a2)], the partitions on a set A with 2 elements and their corresponding equivalence relations are:
+[['a1', 'a2']] -> deltaA U [['a1', 'a2'], ['a2', 'a1']]
+[['a1'], ['a2']] -> deltaA
