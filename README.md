@@ -2,9 +2,9 @@
 
 ## This repository contains all of my work during the BBU bachelor's in Computer Science program
 
-- [Semester 1](#Semester-1)
+- Semester 1
   * [Algebra](#Algebra)
-  * [Calculus](#Calculus)
+  * Calculus
   * [Computational Logic](#Computational-Logic)
   * [Computer Systems Architecture](#Computer-Systems-Architecture)
   * [Fundamentals of Programming](#Fundamentals-of-Programming)
