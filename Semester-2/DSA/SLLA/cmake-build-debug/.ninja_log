@@ -1,0 +1,5 @@
+# ninja log v5
+8	268	6731765183692704	CMakeFiles/SLLA.dir/SLLA_example/Iterator.cpp.obj	bc07d65034c53ee2
+40	630	6731765187332502	CMakeFiles/SLLA.dir/SLLA_example/SLLArr.cpp.obj	559e80b1085f5e73
+638	776	6731765188732558	SLLA.exe	aa6cc58f32dd0590
+1	638	6731765187412477	CMakeFiles/SLLA.dir/SLLA_example/App.cpp.obj	4045e84e39a0f9e8

@@ -1,0 +1,3 @@
+C:/Users/TANIA/Documents/sem2/DSA/SortedBag/cmake-build-debug/CMakeFiles/SortedBag.dir
+C:/Users/TANIA/Documents/sem2/DSA/SortedBag/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/TANIA/Documents/sem2/DSA/SortedBag/cmake-build-debug/CMakeFiles/rebuild_cache.dir

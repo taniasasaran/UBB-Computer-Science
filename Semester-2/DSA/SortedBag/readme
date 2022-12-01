@@ -1,0 +1,13 @@
+14. ADT Sorted Bag – using  a  hashtable  with  coalesced  chaining  in  which  (unique  element, frequency)  pairs
+    are  stored. In  the  constructor  of  the  iterator  create  an  array  of  (element, frequency) pairs,
+    sorted by the element and use that array for iterating.
+
+
+    Node:
+    key: TKey
+    next: Node
+
+    HashTable:
+    T: ( Node) []
+    m: Integer
+    h: TFunction
