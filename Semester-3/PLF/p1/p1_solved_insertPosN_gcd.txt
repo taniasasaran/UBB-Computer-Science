@@ -1,0 +1,70 @@
+9.
+
+a)
+
+%addPos(L-list, E-integer, N-integer, R-result List)
+%flow model (i,i,i,o)
+
+addPos([],E,1,[E]).
+
+addPos(L, E, N, [HR|L]):-
+    N =:= 1,
+    HR is E.
+
+addPos([H|T], E, N, [H|TR]):-
+    N =\= 1,
+    N1 is N-1,
+    addPos(T, E, N1, TR).
+
+addPos([1,2,4,6,2],11,5,[1, 2, 4, 6, 11, 2]),
+addPos([1,2,4,6,2],11,9,[1, 2, 4, 6, 2, 11]),
+addPos([56,8,84,6],1,1,[1, 56, 8, 84, 6]),
+addPos([56,8,84,6],1,2,[56, 1, 8, 84, 6]),
+addPos([56,8,84,6],1,3,[56, 8, 1, 84, 6]),
+addPos([56,8,84,6],1,4,[56, 8, 84, 1, 6]),
+addPos([56,8,84,6],1,5,[56, 8, 84, 6, 1]).
+
+b)
+
+%euclid(X-Integer,Y-Integer,R-result Integer)
+%flow model (i,i,o)
+
+euclid(X,0,X):-!.
+euclid(0,Y,Y):-!.
+
+euclid(X,Y,R):-
+    X>Y,
+    X1 is X-Y,
+    euclid(X1,Y,R).
+
+euclid(X,Y,R):-
+    Y1 is Y-X,
+    euclid(X,Y1,R).
+
+
+%gcd(L-list, RG-result Integer)
+%flow model (i,o)
+
+gcd([],_).
+
+gcd([H|T], REZ):-
+    gcd(T, RG),
+    euclid(H,RG,REZ).
+
+teste1():-
+	
+gcd([10,30,15],5),
+gcd([20,50,30],10),
+gcdL([5],5),
+gcdL([55,66,99],11).
+---------------------
+
+gcdL([],_):-!.
+gcdL([H],H).
+gcdL([H,H1|T],Z):-
+    euclid(H,H1,X),
+    gcdL([X|T],Z).
+
+gcdL([H1,H2],Z):-
+    euclid(H1,H2,Z).
+

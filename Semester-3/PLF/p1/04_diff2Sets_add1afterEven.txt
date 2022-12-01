@@ -1,0 +1,28 @@
+%remove(L-list,L2-atom,RL-result list)
+%flow model (i,i,o) (i,i,i)
+remove([],_,[]).
+remove([H|T],E,R):-
+   	H=:=E,!,
+    remove(T,E,R).
+remove([H|T],E,[H|R]):-
+   	H=\=E,!,
+    remove(T,E,R).
+
+rapper(L1,[],L1):-!.
+
+rapper(L1,[H|T],R2):-
+    remove(L1,H,R),
+    rapper(R,T,R2).
+%rapper([1, 9, 2, 0, 3, 8, 0, 5,  0],[1,9],[2, 0, 3, 8, 0, 5, 0])
+%rapper([1, 9, 2, 0, 3, 8, 0, 5,  0],[1,9,0],[2, 3, 8, 5])
+
+--------------------------------------------
+
+addValue1([],[]).
+addValue1([H|T],[H,1|R]):-
+    mod(H, 2) =:= 0,!,
+    addValue1(T,R).
+addValue1([H|T],[H|R]):-
+    addValue1(T,R).
+
+%addValue1([1, 9, 2, 0, 3, 8, 0, 5,  0],[1, 9, 2, 1, 0, 1, 3, 8, 1, 0, 1, 5, 0, 1])

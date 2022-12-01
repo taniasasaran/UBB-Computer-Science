@@ -1,0 +1,117 @@
+%replace(L-list, N-element, E-element, RL-result list)
+% flow model (i,i,i,o) (i,i,i,i)
+
+replace([],_,_,[]):-!.
+
+replace([H|T], N, E, [E|RL]):-
+    H=:=N,
+    !,
+    replace(T,N,E,RL).
+
+replace([H|T], N, E, [H|RL]):-
+    H=\=N,
+    !,
+    replace(T,N,E,RL).
+
+% getMax(L-list, R-result number)
+% flow model (i,o) (i,i)
+getMaxC([],M,M):-!.
+getMaxC([H|T], M, R):- 
+    number(H),
+    H > M,
+    !,
+    getMaxC(T, H, R). 
+getMaxC([H|T], M, R):- 
+    number(H),
+    H =< M, 
+    !,
+    getMaxC(T, M, R).
+getMaxC([H|T], M, R):- 
+    is_list(H),
+    !,
+    getMaxC(T, M, R).
+getMax([],0).
+getMax([H|T],R):- number(H),!, getMaxC(T, H, R).
+getMax([H|T],R) :- is_list(H),!, getMax(T,R).
+
+% doB(L-list,RL-result list)
+% flow model (i,o) (i,i)
+
+doB([],[]).
+doB(L, RL) :- 
+    getMax(L,M),
+    dob(L,M,RL).
+
+dob([],_,[]):-!.
+
+dob([H|T],M,[H|R]):-
+    number(H),
+    !,
+    dob(T,M,R).
+
+dob([H|T],M,[RH|R]):-
+    is_list(H),
+    !,
+    getMax(H,MH),
+    replace(H,M,MH,RH),
+    dob(T,M,R).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+replaceC([],_,_,[]):-!.
+
+replaceC([H|T], N, E, [E|RL]):-
+    H=:=N,
+    !,
+    replaceC(T,N,E,RL).
+
+replaceC([H|T], N, E, [H|RL]):-
+    H=\=N,
+    H=\=E,
+    !,
+    replaceC(T,N,E,RL).
+
+replaceC([H|T], N, E, [N|RL]):-
+    H=:=E,
+    !,
+    replaceC(T,N,E,RL).
+
+doC([],[]).
+doC(L, RL) :- 
+    getMax(L,M),
+    doc(L,M,RL).
+
+doc([],_,[]):-!.
+
+doc([H|T],M,[H|R]):-
+    number(H),
+    !,
+    doc(T,M,R).
+
+doc([H|T],M,[RH|R]):-
+    is_list(H),
+    !,
+    getMax(H,MH),
+    replaceC(H,M,MH,RH),
+    doc(T,M,R).
+
+testc():-
+    doC([1, [2, 5, 7], 4, 5, [1, 4], 3, [1, 3, 5, 8, 5, 4], 5, [5, 9, 1], 2],[1, [2, 7, 5], 4, 5, [1, 5], 3, [1, 3, 8, 5, 8, 4], 5, [9, 5, 1], 2]),
+    doC([0,[1,2,3],1,0,2,0,1,[3,2,1]],[0, [1, 3, 2], 1, 0, 2, 0, 1, [2, 3, 1]]),
+    doC([],[]),
+    doC([1,4,7,2,[7,9,1]],[1, 4, 7, 2, [9, 7, 1]]),!.
+
+testreplace():-
+    replace([1,4,2,4,6],4,9,[1, 9, 2, 9, 6]),
+    replace([],4,9,[]),
+    replace([1,2,6,9],4,9,[1,2,6,9]),!.
+    
+
+test():-
+    doB([1, [2, 5, 7], 4, 5, [1, 4], 3, [1, 3, 5, 8, 5, 4], 5, [5, 9, 1], 2],[1, [2, 7, 7], 4, 5, [1, 4], 3, [1, 3, 8, 8, 8, 4], 5, [9, 9, 1], 2]),
+    doB([0,[1,2,3],1,0,2,0,1,[3,2,1]],[0, [1, 3, 3], 1, 0, 2, 0, 1, [3, 3, 1]]),
+	doB([[1,2,3],1,0,2,0,1,[3,2,1]],[[1, 3, 3], 1, 0, 2, 0, 1, [3, 3, 1]]),
+    doB([1,4,7,2,3],[1,4,7,2,3]),
+    doB([1,4,7,2,[7,9,1]],[1, 4, 7, 2, [9, 9, 1]]),
+	doB([[7,9,1]],[[7,9,1]]),
+    doB([],[]),!.

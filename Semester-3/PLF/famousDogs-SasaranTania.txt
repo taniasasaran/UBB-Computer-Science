@@ -1,0 +1,96 @@
+%Using Prolog to solve puzzles similar to eistein's 5 houses problem (or zebra puzzles).
+%https://www.brainzilla.com/logic/zebra/famous-dogs/
+
+%Five famous dogs are side by side on a TV program. 
+%Each dog has a special talent and a favorite toy. 
+%Follow the clues to find out what the Rottweiler’s talent is.
+
+/*
+    1.The dog that likes Ice skating is exactly to the left of the dog that has a Frisbee as a favorite toy.
+    2.Max is next to the Border Collie.
+    3.At the fifth position is the 5-year-old dog.
+    4.The youngest dog is exactly to the right of the dog that has a Ball as a favorite toy.
+    5.Toby is exactly to the right of the dog that is wearing the Yellow collar.
+    6.The Doberman is next to the dog that has a Frisbee as a favorite toy.
+    7.Zeus is next to the Labrador.
+    8.The 5-year-old dog is next to the dog that has a Bone as a favorite toy.
+    9.The dog that likes Surfing is exactly to the left of the dog wearing the Red collar.
+    10.The Poodle's talent is Ice skating.
+    11.The Labrador is at the fifth position.
+    12.Toby is next to the 3-year-old dog.
+    13.The dog that has a Frisbee as a favorite toy knows how to Sing.
+    14.Banjo is somewhere to the right of the 3-year-old Dog.
+    15.At one of the ends is the dog that likes Diving.
+    16.The dog wearing the Green collar is somewhere to the left of the dog that has a Ball as a favorite toy.
+    17.Banjo is exactly to the right of the oldest dog.
+    18.The dog that has a Stick as a favorite toy is somewhere to the right of the dog wearing the Blue collar.
+    19.Max is at the first position.
+    20.The dog that knows how to Dance is exactly to the left of the dog wearing the Blue collar.
+    21.The 4-year-old dog is next to the dog that has a Bone as a favorite toy.
+*/
+:- use_rendering(table,
+		 [header(dog('Collar','Name','Breed','Talent','Age','Toy' ))]).
+
+nextToLeft(A, B, Ls) :- append(_, [A,B|_], Ls).
+nextToRight(A, B, Ls) :- append(_, [B,A|_], Ls).
+
+nextTo(A,B, Ls):-append(_,[A,B|_], Ls).
+nextTo(A,B, Ls):-append(_,[B,A|_], Ls).
+
+atAnyEnd(A, Ls):- Ls=[A|_].
+atAnyEnd(A, Ls):- Ls=[_,_,_,_,A].
+
+somewhereLeft(A,B, Ls):- append(_, [A, B|_], Ls).
+somewhereLeft(A,B, Ls):- append(_, [A,_, B|_], Ls).
+somewhereLeft(A,B, Ls):- append(_, [A,_,_, B|_], Ls).
+somewhereLeft(A,B, Ls):- append(_, [A,_,_,_, B|_], Ls).
+
+somewhereRight(A,B, Ls):- append(_, [B, A|_], Ls).
+somewhereRight(A,B, Ls):- append(_, [B,_, A|_], Ls).
+somewhereRight(A,B, Ls):- append(_, [B,_,_, A|_], Ls).
+somewhereRight(A,B, Ls):- append(_, [B,_,_,_, A|_], Ls).
+  
+
+dogs(Dogs) :-
+	% each dog in the group is represented as:
+	%     dog('Collar','Name','Breed','Talent','Age','Toy' )
+    length(Dogs, 5), 
+    Dogs=[dog(_,max,_,_,_,_),dog(_,_,borderCollie,_,_,_),_,dog(_,zeus,_,_,_,bone),dog(_,_,labrador,_,5,_)],   %2,3,7,8,11,19   
+    member(dog(_,_,poodle,iceSkating,_,_),Dogs),                            %10
+    nextToLeft(dog(_,_,_,iceSkating,_,_), dog(_,_,_,_,_,frisbee), Dogs),    %1
+    Youngest = dog(_,_,_,_,2,_),
+    nextToRight(Youngest,dog(_,_,_,_,_,ball),Dogs),                         %4
+    nextToLeft(dog(yellow,_,_,_,_,_),dog(_,toby,_,_,_,_),Dogs),             %5
+    nextTo(dog(_,_,doberman,_,_,_),dog(_,_,_,_,_,frisbee),Dogs),            %6
+    nextToLeft(dog(_,_,_,surfing,_,_),dog(red,_,_,_,_,_),Dogs),             %9
+    nextTo(dog(_,toby,_,_,_,_),dog(_,_,_,_,3,_),Dogs),                      %12
+    member(dog(_,_,_,sing,_,frisbee),Dogs),                                 %13
+    atAnyEnd(dog(_,_,_,diving,_,_),Dogs),                                   %15
+    Oldest = dog(_,_,_,_,6,_),
+    nextToRight(dog(_,banjo,_,_,_,_),Oldest,Dogs),                          %17
+    nextToLeft(dog(_,_,_,dance,_,_),dog(blue,_,_,_,_,_),Dogs),              %20
+    nextTo(dog(_,_,_,_,4,_),dog(_,_,_,_,_,bone),Dogs),                      %21
+    somewhereRight(dog(_,banjo,_,_,_,_),dog(_,_,_,_,3,_),Dogs),             %14
+    somewhereRight(dog(_,_,_,_,_,ball),dog(green,_,_,_,_,_),Dogs),          %16
+    somewhereRight(dog(_,_,_,_,_,stick),dog(blue,_,_,_,_,_),Dogs),          %18
+    member(dog(_,oscar,_,_,_,_),Dogs),
+    member(dog(_,_,_,_,_,teddyBear),Dogs),
+    member(dog(black,_,_,_,_,_),Dogs),
+    member(dog(_,_,rottweiler,_,_,_),Dogs).
+
+
+rottweilers_talent(T) :-
+	dogs(DogsList),
+	member(dog(_,_,rottweiler,T,_,_), DogsList),!.
+
+/*
+Examples:
+dogs(D).
+D = [dog(yellow,max,poodle,iceSkating,3,teddyBear), 
+     dog(green,toby,borderCollie,sing,6,frisbee),
+     dog(black,banjo,doberman,dance,4,ball),
+     dog(blue,zeus,rottweiler,surfing,2,bone),
+     dog(red,oscar,labrador,diving,5,stick)]
+rottweilers_talent(Talent).
+Talent = surfing
+*/

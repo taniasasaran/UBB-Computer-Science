@@ -1,0 +1,46 @@
+11.
+a.
+                        | [] if L=empty 
+replace(l1l2..ln,N,E) = | E(U)replace(l2...ln,N,E) if l1=N
+                        | l1(U)replace(l2...ln,N,E) if l1!=N / otherwise
+
+b.
+
+                       | M, if L=empty
+getMaxC(l1l2...ln,M) = | l1 if l1-number and l1>getMax(l2l3..ln,l1)
+                       | getMax(l2l3..ln,M) otherwise
+
+                   | 0, if L=empty
+getMax(l1l2..ln) = | getMaxC(l2l3..ln,l1) if l1-number
+                   | getMax(T) if l1-list
+
+                  | [] if L=empty
+dob(l1l2..ln,M) = | l1(U)dob(l2l3..ln,M) if l1-number
+                  | replace(l1,M,getMax(l1))(U)dob(l2l3..ln,M) if l1-list
+
+
+c.
+                         | [] if L=empty 
+replaceC(l1l2..ln,N,E) = | E(U)replace(l2...ln,N,E) if l1=N
+                         | l1(U)replace(l2...ln,N,E) if l1!=N, l1!=E
+			 | N(U)replace(l2...ln,N,E) if l1=E
+
+                  | [] if L=empty
+doc(l1l2..ln,M) = | l1(U)doc(l2l3..ln,M) if l1-number
+                  | replaceC(l1,M,getMax(l1))(U)doc(l2l3..ln,M) if l1-list
+
+11.a. Replace all occurrences of an element from a list with another element e.
+b. For a heterogeneous list, formed from integer numbers and list of numbers, 
+define a predicate to determine the maximum number of the list, 
+and then to replace this value in sublists with the maximum value of sublist.
+Eg.: [1, [2, 5, 7], 4, 5, [1, 4], 3, [1, 3, 5, 8, 5, 4], 5, [5, 9, 1], 2] 
+=>[1, [2, 7, 7], 4, 5, [1, 4], 3, [1, 3, 8, 8, 8, 4], 5, [9, 9, 1], 2]
+
+doB([0,[1,2,3],1,0,2,0,1,[3,2,1]],RL)  [0, [1, 3, 3], 1, 0, 2, 0, 1, [3, 3, 1]]
+doB([[1,2,3],1,0,2,0,1,[3,2,1]],RL)    [1, 3, 3], 1, 0, 2, 0, 1, [3, 3, 1]]
+doB([1, [2, 5, 7], 4, 5, [1, 4], 3, [1, 3, 5, 8, 5, 4], 5, [5, 9, 1], 2],RL)
+ = [1, [2, 7, 7], 4, 5, [1, 4], 3, [1, 3, 8, 8, 8, 4], 5, [9, 9, 1], 2]
+
+doC([1, [2, 5, 7], 4, 5, [1, 4], 3, [1, 3, 5, 8, 5, 4], 5, [5, 9, 1], 2],RL)
+ = [1, [2, 7, 5], 4, 5, [1, 5], 3, [1, 3, 8, 5, 8, 4], 5, [9, 5, 1], 2]
+

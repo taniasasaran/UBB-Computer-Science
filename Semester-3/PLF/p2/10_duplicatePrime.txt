@@ -1,0 +1,67 @@
+% 10.
+% a. For a list of integer numbers, define a predicate to write twice in list every prime number.
+
+% checkPrime(nr, div) = 
+% = true, if nr = 2
+% = true, if nr = 3
+% = true, if nr % div != 0 and div >= nr / 2 and nr != 1
+% = prime(nr, div + 2), if nr % div != 0 and nr != 1
+
+% checkPrime(nr, div) = 
+% = true, if nr = div
+% = checkPrime(nr, div + 1), otherwise
+
+
+
+checkPrime(2,_):-!.
+checkPrime(3,_):-!.
+checkPrime(N,D):- 
+    N =\= 1,
+    N mod D =\= 0,
+    D >= N/2,
+    !.
+checkPrime(N,D):- 
+    N =\= 1,
+    N mod D =\= 0,
+    D1 is D+2,
+    checkPrime(N,D1).
+
+% doublePrime(l1l2...ln) = 
+% = [], if n = 0
+% = {l1} U {l1} U doublePrime(l2...ln), if checkPrime(l1, 2) = true
+% = {l1} U doublePrime(l2...ln), otherwise
+
+% doublePrime(L:list, R:list)
+% (i,o)
+
+doublePrime([],[]).
+doublePrime([H|T],[H,H|R]):-
+    checkPrime(H,2),
+    !,
+    doublePrime(T,R).
+doublePrime([H|T],[H|R]):-
+    doublePrime(T,R).
+
+
+% b. For a heterogeneous list, formed from integer numbers and list of numbers, define a predicate
+%    to write in every sublist twice every prime number.
+% Eg.: [1, [2, 3], 4, 5, [1, 4, 6], 3, [1, 3, 7, 9, 10], 5] =>
+% [1, [2, 2, 3, 3], 4, 5, [1, 4, 6], 3, [1, 3, 3, 7, 7, 9, 10], 5]
+
+
+% heterList(l1l2...ln) = 
+% = [], if n = 0
+% = doublePrime(l1) U heterList(l2...ln), if l1 is a list
+% = {l1} U heterList(l2...ln), otherwise
+
+% heterList(L:list, R:list)
+% (i,o)
+
+heterList([],[]).
+heterList([H|T],[RP|R]):-
+	is_list(H),
+    !,
+    doublePrime(H,RP),
+    heterList(T,R).
+heterList([H|T],[H|R]):-
+    heterList(T,R).

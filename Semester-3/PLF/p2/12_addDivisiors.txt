@@ -1,0 +1,61 @@
+% 12
+% a. Define a predicate to add after every element from a list, the divisors of that number.
+
+
+% getDivisors(nr, div, l1l2...ln) = 
+% = l1l2...ln, if nr = div or nr <= 2
+% = {div} U getDivisors(nr, div + 1, l1l2...ln), if nr % div = 0
+% = getDivisors(nr, div + 1, l1l2...ln), otherwise
+
+% getDivisors(N:number, D:number, L:list, R:list)
+% (i,i,i,o)
+
+getDivisors(N,N,L,L).
+getDivisors(N,_,L,L):- N =< 2. 
+getDivisors(N,D,L,[D|R]):-
+    N mod D =:= 0,
+    !,
+    D1 is D + 1,
+    getDivisors(N,D1,L,R).
+getDivisors(N,D,L,R):-
+    D1 is D + 1,
+    getDivisors(N,D1,L,R).
+
+
+
+% addDivisors(l1l2...ln) = 
+% = [], if n = 0
+% = {l1} U wrapperDiv(l1) U addDivisors(l2...ln), otherwise
+
+% addDivisors(L:list, R:list)
+% (i,o)
+
+addDivisors([],[]).
+addDivisors([H|T],[H|R]):-
+    addDivisors(T,RD),
+    getDivisors(H,2,RD,R).
+    
+
+% b. For a heterogeneous list, formed from integer numbers and list of numbers,
+%    define a predicate to add in every sublist the divisors of every element.
+% Eg.: [1, [2, 5, 7], 4, 5, [1, 4], 3, 2, [6, 2, 1], 4, [7, 2, 8, 1], 2] =>
+% [1, [2, 5, 7], 4, 5, [1, 4, 2], 3, 2, [6, 2, 3, 2, 1], 4, [7, 2, 8, 2, 4, 1], 2]
+
+
+
+% heterList(l1l2...ln) = 
+% = [], if n = 0
+% = addDivisors(l1) U heterList(l2...ln), if is_list(l1) = true
+% = {l1} U heterList(l2...ln), otherwise
+
+% heterList(L:list, R:list)
+% (i,o)
+
+heterList([],[]).
+heterList([H|T],[RD|R]):-
+    is_list(H),
+    !,
+    addDivisors(H,RD),
+    heterList(T,R).
+heterList([H|T],[H|R]):-
+    heterList(T,R).

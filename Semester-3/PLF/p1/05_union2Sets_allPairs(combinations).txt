@@ -1,0 +1,50 @@
+nrOcc([],_,0).
+nrOcc([H|T],E,R):-
+    nrOcc(T,E,R2),
+    H=:=E,
+    R is R2+1.
+nrOcc([H|T],E,R):-
+    H=\=E,
+    nrOcc(T,E,R).
+
+%remove(L-list,L2-atom,RL-result list)
+%flow model (i,i,o) (i,i,i)
+
+concatenate([],L2,L2).
+concatenate([H|T],L2,[H|R]):-
+    concatenate(T,L2,R),!.
+%concatenate([1,4,2],[3,8],[1,4,2,3,8])
+
+removeDuplicates([],[]).
+removeDuplicates([H|T],[H|R]):-
+    nrOcc([H|T],H,1),
+    removeDuplicates(T,R).
+removeDuplicates([H|T],R):-
+    nrOcc([H|T],H,N),
+    N=\=1,
+    removeDuplicates(T,R).
+
+union(L1,L2,R):-
+    concatenate(L1,L2,CR),
+    removeDuplicates(CR,R).
+
+------------------------------------------
+
+getpairs([],_,[]).
+getpairs([H|T],[H2|T2],[[H,H2]|R]):-
+    H =\= H2,
+    !,
+    getpairs([H|T],T2,R).
+
+getpairs([H|T],[H2|T2],R):-
+    H =:= H2,
+    !,
+    getpairs([H|T],T2,R).
+
+getpairs([_|T],L2,R):-
+    L2 = [],
+    !,
+    getpairs(T,T,R).
+
+rapper([H|T],R):-
+    getpairs([H|T],T,R).

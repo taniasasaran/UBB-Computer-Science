@@ -1,0 +1,48 @@
+% 3.
+% a. Merge two sorted lists with removing the double values.
+
+
+% Model matematic:
+% myMerge(l1l2...ln, p1p2...pm) =
+% = l1l2...ln, m = 0
+% = p1p2...pm, n = 0
+% = {l1} U myMerge(l2...ln, p1p2...pm), l1 < p1
+% = {p1} U myMerge(l1l2...ln, p2...pm), l1 > p1
+% = myMerge(l1l2...ln, p2...pm), l1 = r1
+
+% myMerge(L:list, P:list, R:list)
+% (i,i,o)
+
+myMerge([],P,P):-!.
+myMerge(L,[],L):-!.
+myMerge([H1|T1],[H2|T2],[H1|R]):-
+    H1<H2,
+    myMerge(T1,[H2|T2],R).
+myMerge([H1|T1],[H2|T2],[H2|R]):-
+    H1>H2,
+    myMerge([H1|T1],T2,R).
+myMerge([H1|T1],[H2|T2],R):-
+    H1=:=H2,
+    myMerge([H1|T1],T2,R).
+
+% b. For a heterogeneous list, formed from integer numbers and list of numbers, merge all sublists with removing
+%    the double values.
+% [1, [2, 3], 4, 5, [1, 4, 6], 3, [1, 3, 7, 9, 10], 5, [1, 1, 11], 8] =>
+% [1, 2, 3, 4, 6, 7, 9, 10, 11].
+
+% heterList(l1l2...ln) = 
+% = [], if n = 0
+% = myMerge(l1, heterList(l2...ln)), if l1 is a list
+% = heterList(l2...ln), otherwise
+
+% heretList(L:list, R:list)
+% (i,o)
+
+heterList([],[]).
+heterList([H|T],R1):-
+    is_list(H),
+    !,
+    heterList(T,R),
+    myMerge(H,R,R1).
+heterList([_|T],R):-
+    heterList(T,R).

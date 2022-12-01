@@ -1,0 +1,84 @@
+11.“Colouring” a map. n countries are given; 
+write a predicate to determine all possibilities of 
+colouring n countries with m colours, 
+such that two adjacent countries not having the same colour.
+
+% bet(N-number,M-number,R-result number)
+% (i,o) (i,i)
+%bet(N,M) = 
+bet(N, M, K) :- N =< M, K = N.
+bet(N, M, K) :- N < M, N1 is N+1, bet(N1, M, K).
+
+% color(R-result list,M-number)
+% (i,o) (i,i)
+%color(M) = bet(1,M)
+color(R,M):-
+    bet(1, M, R).
+
+% combination(M-number,N-number,L-accumulating list,R-result list)
+% (i,i,i,o) (i,i,i,i)
+
+% combination(M,N,l1l2...ln) =  
+% = l1l2...ln, if n = 0
+% = {color(l1)}(U)combination(M,N-1,l2...ln)
+
+combination(_,0,L,L):- !.
+
+combination(M,N,T,R):-
+    color(H,M),
+    N1 is N-1,
+    combination(M,N1,[H|T],R).
+
+
+% check(L-list,C-check,P-number/color(previous),but initially it is 0 which is not in 1,M)
+% (i,i,i)
+
+% check(l1l2..ln,C,P) =
+% = true if n=0 and C=0
+% = check(l2l3..ln,C,H) if H!=P
+% = check(l2l3..ln,1,H) if H==P 
+
+check([],0,_).
+
+check([H|T],_,P):- H is P,
+    CN is 1,
+    check(T,CN,H).
+
+check([H|T],C,P):- \+ H is P,
+    check(T,C,H).
+
+%getlast(L-list,R-element number)
+%(i,o) (i,i)
+
+% getlast(l1l2..ln) = 
+% = l1 if n=1
+% = getlast(l2..ln)
+
+getlast([T],T).
+
+getlast([_|T],R):-getlast(T,R).
+
+% solution(M-number,N-number,R-result list)
+% (i,i,o)
+
+% solution(M,N)=
+% = combination(M,N,[]), if check(combination(M,N,[]),0,0)=true and getlast(combination(M,N,[])\{R1})!=combination(M,N,[])[1] (this is a check for first elem != last elem)
+
+solution(M,N,R):-
+    combination(M,N,[],R),
+    check(R,0,0),
+    R=[HR|TR],
+    getlast(TR,L),
+    \+ HR=:=L.
+
+solve(M,N,R):-
+    findall(P,solution(M,N,P),R).
+
+test():-
+    solve(3,2,[[2, 1], [3, 1], [1, 2], [3, 2], [1, 3], [2, 3]]),
+    solve(2,2,[[2, 1], [1, 2]]),
+    solve(2,5,[]).
+    
+
+%check([1,3,2,3],0,0) -true
+%check([1,3,2,2],1,0) -meaning the combination is not good

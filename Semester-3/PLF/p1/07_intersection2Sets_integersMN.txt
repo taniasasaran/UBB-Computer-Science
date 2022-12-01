@@ -1,0 +1,27 @@
+rapper(A,B,I):-
+    intersection(A,B,I).
+
+intersection([],_,[]).
+
+intersection([H|T],B,[H|R]):-
+    isIn(B,H),!,
+    intersection(T,B,R).
+
+intersection([_|T],B,R):-
+    intersection(T,B,R).
+
+not(isIn([],_)).
+isIn([H|_],E):-
+    H=:=E.
+isIn([H|T],E):-
+    H=\=E,
+    isIn(T,E).
+
+----------------------------------
+
+createList(M,N,[M|R]):-
+    M2 is M+1,
+    N=\=M,!,
+    createList(M2,N,R).
+createList(M,M,[M]).    
+   

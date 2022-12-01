@@ -1,0 +1,35 @@
+%remove(L-list,E-atom,RL-result list)
+%flow model (i,i,o) (i,i,i)
+remove([],_,[]).
+remove([H|T],E,R):-
+   	H=:=E,!,
+    remove(T,E,R).
+remove([H|T],E,[H|R]):-
+   	H=\=E,!,
+    remove(T,E,R).
+
+%remove([1,4,2,5,1,5,7,3,1,7],1,[4, 2, 5, 5, 7, 3, 7]).
+
+nrOcc([],_,0).
+nrOcc([H|T],E,R):-
+    nrOcc(T,E,R2),
+    H=:=E,
+    R is R2+1.
+nrOcc([H|T],E,R):-
+    H=\=E,
+    nrOcc(T,E,R).
+
+%nrOcc([3,34,2,1,4,2,1,2,6,3,2,3],3,3)
+%nrOcc([3,34,2,1,4,2,1,2,6,3,2,3],2,4)
+
+--------------------------------------------
+
+numberAtom([],_,[]):-!.
+
+numberAtom([H|T],L,[[H,K]|R]):-
+    nrOcc(L,H,K),
+    remove(L,H,L2),
+    remove(T,H,T2),
+    numberAtom(T2,L2,R).
+
+rapper(L,R):-numberAtom(L,L,R),!.

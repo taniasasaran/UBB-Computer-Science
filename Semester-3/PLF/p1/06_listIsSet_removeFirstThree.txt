@@ -1,0 +1,38 @@
+rapper(L):-isset(L,L).
+
+nrOcc([],_,0).
+nrOcc([H|T],E,R):-
+    nrOcc(T,E,R2),
+    H=:=E,
+    R is R2+1.
+nrOcc([H|T],E,R):-
+    H=\=E,
+    nrOcc(T,E,R).
+
+isset([],_).
+
+isset([H|T],L):-
+    nrOcc(L,H,1),
+    !,
+    isset(T,L).
+
+------------------------------
+
+rapper(L,E,R):-removeFirstThree(L,3,E,R),!.
+
+removeFirstThree([H|T],N,E,R):-
+    H=:=E,
+    N>0,
+    !,
+    N2 is N-1,
+    removeFirstThree(T,N2,E,R).
+
+removeFirstThree([H|T],N,E,[H|R]):-
+       removeFirstThree(T,N,E,R).
+
+removeFirstThree([],_,_,[]).
+removeFirstThree(L,0,_,L).
+
+%rapper([1,2,3,1,9,3,1,2,4,1],1,[2, 3, 9, 3, 2, 4, 1])
+
+

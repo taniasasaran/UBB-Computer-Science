@@ -1,0 +1,31 @@
+listToSet([H|T],[H|R]):-
+	listToSet(T,R),
+    \+(isIn(R,H)),!.
+  
+listToSet([H|T],R):-
+	listToSet(T,R),
+    isIn(R,H),!.
+
+listToSet([],[]).
+    
+isIn([H|_],E):-
+    H=:=E.
+isIn([H|T],E):-
+    H=\=E,
+    isIn(T,E).
+not(isIn([],_)).
+
+------------------------------
+
+listToSet([H|T],[H|R]):-
+	remove(T,H,TR),
+    listToSet(TR,R).
+listToSet([],[]).
+
+remove([],_,[]).
+remove([H|T],E,R):-
+   	H=:=E,!,
+    remove(T,E,R).
+remove([H|T],E,[H|R]):-
+   	H=\=E,!,
+    remove(T,E,R).

@@ -1,0 +1,36 @@
+reverse([],[]).  %reverse of empty is empty - base case
+reverse([H|T], RevList):-
+    reverse(T, RevT), append(RevT, [H], RevList).
+
+listToNumber([H|T],P2,R2):-
+    listToNumber(T,P,R),
+    P2 is P+1,
+    R2 is R+H*(10**P).
+listToNumber([],0,0).
+
+numberToList(N,[E|R]):-
+    N>9,!,
+    numberToList(N//10,R),
+    E is mod(N,10).
+
+numberToList(N,[E]):-
+    N<10,!,
+    E is mod(N,10).
+
+sum(L1,L2,R):-
+    %reverse(L1,R1),
+    %reverse(L2,R2),
+    listToNumber(L1,_,N1),
+    listToNumber(L2,_,N2),
+    NR is N1+N2,
+    numberToList(NR,RR),
+    reverse(RR,R).
+
+heterList([],[]).
+heterList([H|T],RR):-
+    is_list(H),
+    !,
+    heterList(T,R),
+    sum(H,R,RR).
+heterList([_|T],R):-
+    heterList(T,R).

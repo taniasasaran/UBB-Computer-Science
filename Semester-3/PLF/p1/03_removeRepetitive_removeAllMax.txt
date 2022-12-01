@@ -1,0 +1,65 @@
+nrOcc([],_,0).
+nrOcc([H|T],E,R):-
+    nrOcc(T,E,R2),
+    H=:=E,
+    R is R2+1.
+nrOcc([H|T],E,R):-
+    H=\=E,
+    nrOcc(T,E,R).
+
+%nrOcc([3,34,2,1,4,2,1,2,6,3,2,3],3,3)
+%nrOcc([3,34,2,1,4,2,1,2,6,3,2,3],2,4)
+
+removeRepetitive([],_,[]):-!.
+
+removeRepetitive([H|T],L,[H|R]):-
+    nrOcc(L,H,K),
+    K=:=1,!,
+    removeRepetitive(T,L,R).
+
+removeRepetitive([H|T],L,R):-
+    nrOcc(L,H,K),
+    K>1,!,
+    removeRepetitive(T,L,R).
+
+rapper(L,R):-removeRepetitive(L,L,R),!.
+
+% rapper([1, 0, 2, 0, 3, 4, 0, 5,  0,9],[1, 2, 3, 4, 5, 9])
+
+--------------------------------------
+
+% getMax(L-list, R-result number)
+% flow model (i,o) (i,i)
+getMaxC([],M,M):-!.
+getMaxC([H|T], M, R):- 
+    number(H),
+    H > M,
+    !,
+    getMaxC(T, H, R). 
+getMaxC([H|T], M, R):- 
+    number(H),
+    H =< M, 
+    !,
+    getMaxC(T, M, R).
+getMaxC([H|T], M, R):- 
+    is_list(H),
+    !,
+    getMaxC(T, M, R).
+getMax([],0).
+getMax([H|T],R):- number(H),!, getMaxC(T, H, R).
+getMax([H|T],R) :- is_list(H),!, getMax(T,R).
+
+%remove(L-list,E-atom,RL-result list)
+%flow model (i,i,o) (i,i,i)
+remove([],_,[]).
+remove([H|T],E,R):-
+   	H=:=E,!,
+    remove(T,E,R).
+remove([H|T],E,[H|R]):-
+   	H=\=E,!,
+    remove(T,E,R).
+
+brapper(L,R):-
+    getMax(L,M),
+    remove(L,M,R).
+%remove([1,4,2,5,1,5,7,3,1,7],1,[4, 2, 5, 5, 7, 3, 7]).

@@ -1,0 +1,63 @@
+%euclid(X-Integer,Y-Integer,R-result Integer)
+%flow model (i,i,o) (i,i,i)
+
+euclid(X,0,X):-!.
+euclid(0,Y,Y):-!.
+
+euclid(X,Y,R):-
+    X>Y,
+    X1 is X-Y,
+    euclid(X1,Y,R).
+
+euclid(X,Y,R):-
+    Y1 is Y-X,
+    euclid(X,Y1,R).
+
+%lcm(X-Integer,Y-Integer,R-result Integer)
+%flow model (i,i,o) (i,i,i)
+lcm(A,0,A):-!.
+lcm(0,A,A):-!.
+lcm(A,B,R):-
+    A=\=0,
+    B=\=0,
+    euclid(A,B,G),
+    !,
+    R is A*B/G.
+
+%lcm_list(L-List,R-result Integer)
+%flow model (i,o) (i,i)
+lcm_list([],0):-!.
+lcm_list([H|T],R2):-
+    lcm_list(T,R),
+    lcm(H,R,R2).
+
+lcm_list([3,7,6,4],84)
+
+--------------------------------------------------
+
+% b. Write a predicate to add a value v after 1-st, 2-nd, 4-th, 8-th, ... element in a list.
+
+% insertAtPos(l1l2...ln, v, pos, index) =
+% = [], if n = 0 
+% = {l1} U {v} U insertAtPos(l2...ln, v, pos*2, index + 1), if index = pos
+% = {l1} U insertAtPos(l2...ln, v, pos, index + 1), if pos != index
+
+%insertAtPos(L:list, V: number, POS: number, INDEX: number, R: list)
+%insertAtPos(i,i,i,i,o)
+
+insertAtPos([], _, _, _, []).
+insertAtPos([H|T], V, POS, INDEX, [H, V | R]):-
+    POS=:=INDEX,!,
+    POS2 is POS * 2,
+    INDEX2 is INDEX + 1,
+    insertAtPos(T, V, POS2, INDEX2, R).
+insertAtPos([H|T], V, POS, INDEX, [H | R]):-
+    INDEX2 is INDEX + 1,
+    insertAtPos(T, V, POS, INDEX2, R).
+
+
+rapper(L, V, R):- 
+    insertAtPos(L, V, 1, 1, R).
+
+rapper([1,2,3,4,5,6,7,8],0,[1, 0, 2, 0, 3, 4, 0, 5, 6, 7, 8, 0])
+rapper([1,2,3,4,5,6,7,8,9],0,[1, 0, 2, 0, 3, 4, 0, 5, 6, 7, 8, 0,9])

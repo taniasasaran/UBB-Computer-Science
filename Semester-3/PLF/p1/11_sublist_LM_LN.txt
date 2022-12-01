@@ -1,0 +1,15 @@
+createList([_|T],INDEX,M,N,R):-
+    M>INDEX,
+    !,
+    INDEX2 is INDEX+1,
+    createList(T,INDEX2,M,N,R).
+createList([H|T],INDEX,M,N,[H|R]):-
+    INDEX2 is INDEX+1,
+    N=\=INDEX,
+    INDEX >=M,!,
+    createList(T,INDEX2,M,N,R).
+createList([H|_],N,_,N,[H]).    
+   
+rapper(L,M,N,R):-createList(L,1,M,N,R).
+
+----------------------------------------------
