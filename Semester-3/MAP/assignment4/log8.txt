@@ -1,0 +1,119 @@
+Execution Stack:
+(v=(Ref int);(new(varName='v', expression='20');(a=(Ref Ref int);(new(varName='a', expression='v');(print(readHeap(varName='v'));print(readHeap(varName='readHeap(varName='a')')+5))))))
+Symbol Table:
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+v=(Ref int)
+(new(varName='v', expression='20');(a=(Ref Ref int);(new(varName='a', expression='v');(print(readHeap(varName='v'));print(readHeap(varName='readHeap(varName='a')')+5)))))
+Symbol Table:
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(new(varName='v', expression='20');(a=(Ref Ref int);(new(varName='a', expression='v');(print(readHeap(varName='v'));print(readHeap(varName='readHeap(varName='a')')+5)))))
+Symbol Table:
+v->(0, int)
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+new(varName='v', expression='20')
+(a=(Ref Ref int);(new(varName='a', expression='v');(print(readHeap(varName='v'));print(readHeap(varName='readHeap(varName='a')')+5))))
+Symbol Table:
+v->(0, int)
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(a=(Ref Ref int);(new(varName='a', expression='v');(print(readHeap(varName='v'));print(readHeap(varName='readHeap(varName='a')')+5))))
+Symbol Table:
+v->(1, int)
+Heap:
+1->20
+Output List:
+File Table:
+
+Execution Stack:
+a=(Ref Ref int)
+(new(varName='a', expression='v');(print(readHeap(varName='v'));print(readHeap(varName='readHeap(varName='a')')+5)))
+Symbol Table:
+v->(1, int)
+Heap:
+1->20
+Output List:
+File Table:
+
+Execution Stack:
+(new(varName='a', expression='v');(print(readHeap(varName='v'));print(readHeap(varName='readHeap(varName='a')')+5)))
+Symbol Table:
+a->(0, Ref int)
+v->(1, int)
+Heap:
+1->20
+Output List:
+File Table:
+
+Execution Stack:
+new(varName='a', expression='v')
+(print(readHeap(varName='v'));print(readHeap(varName='readHeap(varName='a')')+5))
+Symbol Table:
+a->(0, Ref int)
+v->(1, int)
+Heap:
+1->20
+Output List:
+File Table:
+
+Execution Stack:
+(print(readHeap(varName='v'));print(readHeap(varName='readHeap(varName='a')')+5))
+Symbol Table:
+a->(2, Ref int)
+v->(1, int)
+Heap:
+1->20
+2->(1, int)
+Output List:
+File Table:
+
+Execution Stack:
+print(readHeap(varName='v'))
+print(readHeap(varName='readHeap(varName='a')')+5)
+Symbol Table:
+a->(2, Ref int)
+v->(1, int)
+Heap:
+1->20
+2->(1, int)
+Output List:
+File Table:
+
+Execution Stack:
+print(readHeap(varName='readHeap(varName='a')')+5)
+Symbol Table:
+a->(2, Ref int)
+v->(1, int)
+Heap:
+1->20
+2->(1, int)
+Output List:
+20
+File Table:
+
+Execution Stack:
+Symbol Table:
+a->(2, Ref int)
+v->(1, int)
+Heap:
+1->20
+2->(1, int)
+Output List:
+20
+25
+File Table:
+

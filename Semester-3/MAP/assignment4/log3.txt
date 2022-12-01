@@ -1,0 +1,98 @@
+Execution Stack:
+(a=(bool);(v=(int);(a=true;((IF(a) THEN(v=2)ELSE(v=3));print(v)))))
+Symbol Table:
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+a=(bool)
+(v=(int);(a=true;((IF(a) THEN(v=2)ELSE(v=3));print(v))))
+Symbol Table:
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(v=(int);(a=true;((IF(a) THEN(v=2)ELSE(v=3));print(v))))
+Symbol Table:
+a->false
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+v=(int)
+(a=true;((IF(a) THEN(v=2)ELSE(v=3));print(v)))
+Symbol Table:
+a->false
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(a=true;((IF(a) THEN(v=2)ELSE(v=3));print(v)))
+Symbol Table:
+a->false
+v->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+a=true
+((IF(a) THEN(v=2)ELSE(v=3));print(v))
+Symbol Table:
+a->false
+v->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+((IF(a) THEN(v=2)ELSE(v=3));print(v))
+Symbol Table:
+a->true
+v->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(IF(a) THEN(v=2)ELSE(v=3))
+print(v)
+Symbol Table:
+a->true
+v->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+v=2
+print(v)
+Symbol Table:
+a->true
+v->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+print(v)
+Symbol Table:
+a->true
+v->2
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+Symbol Table:
+a->true
+v->2
+Heap:
+Output List:
+2
+File Table:
+

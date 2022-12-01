@@ -1,0 +1,98 @@
+Execution Stack:
+(a=(int);(v=(int);(a=4;((IF(5<=a) THEN(v=2)ELSE(v=3));print(v)))))
+Symbol Table:
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+a=(int)
+(v=(int);(a=4;((IF(5<=a) THEN(v=2)ELSE(v=3));print(v))))
+Symbol Table:
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(v=(int);(a=4;((IF(5<=a) THEN(v=2)ELSE(v=3));print(v))))
+Symbol Table:
+a->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+v=(int)
+(a=4;((IF(5<=a) THEN(v=2)ELSE(v=3));print(v)))
+Symbol Table:
+a->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(a=4;((IF(5<=a) THEN(v=2)ELSE(v=3));print(v)))
+Symbol Table:
+a->0
+v->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+a=4
+((IF(5<=a) THEN(v=2)ELSE(v=3));print(v))
+Symbol Table:
+a->0
+v->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+((IF(5<=a) THEN(v=2)ELSE(v=3));print(v))
+Symbol Table:
+a->4
+v->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(IF(5<=a) THEN(v=2)ELSE(v=3))
+print(v)
+Symbol Table:
+a->4
+v->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+v=3
+print(v)
+Symbol Table:
+a->4
+v->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+print(v)
+Symbol Table:
+a->4
+v->3
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+Symbol Table:
+a->4
+v->3
+Heap:
+Output List:
+3
+File Table:
+

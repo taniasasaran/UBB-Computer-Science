@@ -1,0 +1,178 @@
+Execution Stack:
+(varf=(string);(varf=test.in;(open varf;(varc=(int);(reading from file varf into the variable varc;(print(varc);(reading from file varf into the variable varc;(print(varc);closing the file varf))))))))
+Symbol Table:
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+varf=(string)
+(varf=test.in;(open varf;(varc=(int);(reading from file varf into the variable varc;(print(varc);(reading from file varf into the variable varc;(print(varc);closing the file varf)))))))
+Symbol Table:
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(varf=test.in;(open varf;(varc=(int);(reading from file varf into the variable varc;(print(varc);(reading from file varf into the variable varc;(print(varc);closing the file varf)))))))
+Symbol Table:
+varf->
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+varf=test.in
+(open varf;(varc=(int);(reading from file varf into the variable varc;(print(varc);(reading from file varf into the variable varc;(print(varc);closing the file varf))))))
+Symbol Table:
+varf->
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(open varf;(varc=(int);(reading from file varf into the variable varc;(print(varc);(reading from file varf into the variable varc;(print(varc);closing the file varf))))))
+Symbol Table:
+varf->test.in
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+open varf
+(varc=(int);(reading from file varf into the variable varc;(print(varc);(reading from file varf into the variable varc;(print(varc);closing the file varf)))))
+Symbol Table:
+varf->test.in
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(varc=(int);(reading from file varf into the variable varc;(print(varc);(reading from file varf into the variable varc;(print(varc);closing the file varf)))))
+Symbol Table:
+varf->test.in
+Heap:
+Output List:
+File Table:
+test.in
+
+Execution Stack:
+varc=(int)
+(reading from file varf into the variable varc;(print(varc);(reading from file varf into the variable varc;(print(varc);closing the file varf))))
+Symbol Table:
+varf->test.in
+Heap:
+Output List:
+File Table:
+test.in
+
+Execution Stack:
+(reading from file varf into the variable varc;(print(varc);(reading from file varf into the variable varc;(print(varc);closing the file varf))))
+Symbol Table:
+varf->test.in
+varc->0
+Heap:
+Output List:
+File Table:
+test.in
+
+Execution Stack:
+reading from file varf into the variable varc
+(print(varc);(reading from file varf into the variable varc;(print(varc);closing the file varf)))
+Symbol Table:
+varf->test.in
+varc->0
+Heap:
+Output List:
+File Table:
+test.in
+
+Execution Stack:
+(print(varc);(reading from file varf into the variable varc;(print(varc);closing the file varf)))
+Symbol Table:
+varf->test.in
+varc->15
+Heap:
+Output List:
+File Table:
+test.in
+
+Execution Stack:
+print(varc)
+(reading from file varf into the variable varc;(print(varc);closing the file varf))
+Symbol Table:
+varf->test.in
+varc->15
+Heap:
+Output List:
+File Table:
+test.in
+
+Execution Stack:
+(reading from file varf into the variable varc;(print(varc);closing the file varf))
+Symbol Table:
+varf->test.in
+varc->15
+Heap:
+Output List:
+15
+File Table:
+test.in
+
+Execution Stack:
+reading from file varf into the variable varc
+(print(varc);closing the file varf)
+Symbol Table:
+varf->test.in
+varc->15
+Heap:
+Output List:
+15
+File Table:
+test.in
+
+Execution Stack:
+(print(varc);closing the file varf)
+Symbol Table:
+varf->test.in
+varc->50
+Heap:
+Output List:
+15
+File Table:
+test.in
+
+Execution Stack:
+print(varc)
+closing the file varf
+Symbol Table:
+varf->test.in
+varc->50
+Heap:
+Output List:
+15
+File Table:
+test.in
+
+Execution Stack:
+closing the file varf
+Symbol Table:
+varf->test.in
+varc->50
+Heap:
+Output List:
+15
+50
+File Table:
+test.in
+
+Execution Stack:
+Symbol Table:
+varf->test.in
+varc->50
+Heap:
+Output List:
+15
+50
+File Table:
+

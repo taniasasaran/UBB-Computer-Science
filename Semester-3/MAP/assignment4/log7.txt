@@ -1,0 +1,92 @@
+Execution Stack:
+(v=(Ref int);(new(varName='v', expression='20');(print(readHeap(varName='v'));(writeHeap(varName='v', expression=30);print(readHeap(varName='v')+5)))))
+Symbol Table:
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+v=(Ref int)
+(new(varName='v', expression='20');(print(readHeap(varName='v'));(writeHeap(varName='v', expression=30);print(readHeap(varName='v')+5))))
+Symbol Table:
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(new(varName='v', expression='20');(print(readHeap(varName='v'));(writeHeap(varName='v', expression=30);print(readHeap(varName='v')+5))))
+Symbol Table:
+v->(0, int)
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+new(varName='v', expression='20')
+(print(readHeap(varName='v'));(writeHeap(varName='v', expression=30);print(readHeap(varName='v')+5)))
+Symbol Table:
+v->(0, int)
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(print(readHeap(varName='v'));(writeHeap(varName='v', expression=30);print(readHeap(varName='v')+5)))
+Symbol Table:
+v->(1, int)
+Heap:
+1->20
+Output List:
+File Table:
+
+Execution Stack:
+print(readHeap(varName='v'))
+(writeHeap(varName='v', expression=30);print(readHeap(varName='v')+5))
+Symbol Table:
+v->(1, int)
+Heap:
+1->20
+Output List:
+File Table:
+
+Execution Stack:
+(writeHeap(varName='v', expression=30);print(readHeap(varName='v')+5))
+Symbol Table:
+v->(1, int)
+Heap:
+1->20
+Output List:
+20
+File Table:
+
+Execution Stack:
+writeHeap(varName='v', expression=30)
+print(readHeap(varName='v')+5)
+Symbol Table:
+v->(1, int)
+Heap:
+1->20
+Output List:
+20
+File Table:
+
+Execution Stack:
+print(readHeap(varName='v')+5)
+Symbol Table:
+v->(1, int)
+Heap:
+1->30
+Output List:
+20
+File Table:
+
+Execution Stack:
+Symbol Table:
+v->(1, int)
+Heap:
+1->30
+Output List:
+20
+35
+File Table:
+

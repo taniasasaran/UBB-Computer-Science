@@ -1,0 +1,88 @@
+Execution Stack:
+(a=(int);(b=(int);(a=2+3*5;(b=a+1;print(b)))))
+Symbol Table:
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+a=(int)
+(b=(int);(a=2+3*5;(b=a+1;print(b))))
+Symbol Table:
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(b=(int);(a=2+3*5;(b=a+1;print(b))))
+Symbol Table:
+a->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+b=(int)
+(a=2+3*5;(b=a+1;print(b)))
+Symbol Table:
+a->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(a=2+3*5;(b=a+1;print(b)))
+Symbol Table:
+a->0
+b->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+a=2+3*5
+(b=a+1;print(b))
+Symbol Table:
+a->0
+b->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(b=a+1;print(b))
+Symbol Table:
+a->17
+b->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+b=a+1
+print(b)
+Symbol Table:
+a->17
+b->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+print(b)
+Symbol Table:
+a->17
+b->18
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+Symbol Table:
+a->17
+b->18
+Heap:
+Output List:
+18
+File Table:
+

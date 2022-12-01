@@ -1,0 +1,265 @@
+Execution Stack:
+(v=(int);(v=4;((WHILE(v>0) (print(v);v=v-1));print(v))))
+Symbol Table:
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+v=(int)
+(v=4;((WHILE(v>0) (print(v);v=v-1));print(v)))
+Symbol Table:
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(v=4;((WHILE(v>0) (print(v);v=v-1));print(v)))
+Symbol Table:
+v->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+v=4
+((WHILE(v>0) (print(v);v=v-1));print(v))
+Symbol Table:
+v->0
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+((WHILE(v>0) (print(v);v=v-1));print(v))
+Symbol Table:
+v->4
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(WHILE(v>0) (print(v);v=v-1))
+print(v)
+Symbol Table:
+v->4
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+(print(v);v=v-1)
+(WHILE(v>0) (print(v);v=v-1))
+print(v)
+Symbol Table:
+v->4
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+print(v)
+v=v-1
+(WHILE(v>0) (print(v);v=v-1))
+print(v)
+Symbol Table:
+v->4
+Heap:
+Output List:
+File Table:
+
+Execution Stack:
+v=v-1
+(WHILE(v>0) (print(v);v=v-1))
+print(v)
+Symbol Table:
+v->4
+Heap:
+Output List:
+4
+File Table:
+
+Execution Stack:
+(WHILE(v>0) (print(v);v=v-1))
+print(v)
+Symbol Table:
+v->3
+Heap:
+Output List:
+4
+File Table:
+
+Execution Stack:
+(print(v);v=v-1)
+(WHILE(v>0) (print(v);v=v-1))
+print(v)
+Symbol Table:
+v->3
+Heap:
+Output List:
+4
+File Table:
+
+Execution Stack:
+print(v)
+v=v-1
+(WHILE(v>0) (print(v);v=v-1))
+print(v)
+Symbol Table:
+v->3
+Heap:
+Output List:
+4
+File Table:
+
+Execution Stack:
+v=v-1
+(WHILE(v>0) (print(v);v=v-1))
+print(v)
+Symbol Table:
+v->3
+Heap:
+Output List:
+4
+3
+File Table:
+
+Execution Stack:
+(WHILE(v>0) (print(v);v=v-1))
+print(v)
+Symbol Table:
+v->2
+Heap:
+Output List:
+4
+3
+File Table:
+
+Execution Stack:
+(print(v);v=v-1)
+(WHILE(v>0) (print(v);v=v-1))
+print(v)
+Symbol Table:
+v->2
+Heap:
+Output List:
+4
+3
+File Table:
+
+Execution Stack:
+print(v)
+v=v-1
+(WHILE(v>0) (print(v);v=v-1))
+print(v)
+Symbol Table:
+v->2
+Heap:
+Output List:
+4
+3
+File Table:
+
+Execution Stack:
+v=v-1
+(WHILE(v>0) (print(v);v=v-1))
+print(v)
+Symbol Table:
+v->2
+Heap:
+Output List:
+4
+3
+2
+File Table:
+
+Execution Stack:
+(WHILE(v>0) (print(v);v=v-1))
+print(v)
+Symbol Table:
+v->1
+Heap:
+Output List:
+4
+3
+2
+File Table:
+
+Execution Stack:
+(print(v);v=v-1)
+(WHILE(v>0) (print(v);v=v-1))
+print(v)
+Symbol Table:
+v->1
+Heap:
+Output List:
+4
+3
+2
+File Table:
+
+Execution Stack:
+print(v)
+v=v-1
+(WHILE(v>0) (print(v);v=v-1))
+print(v)
+Symbol Table:
+v->1
+Heap:
+Output List:
+4
+3
+2
+File Table:
+
+Execution Stack:
+v=v-1
+(WHILE(v>0) (print(v);v=v-1))
+print(v)
+Symbol Table:
+v->1
+Heap:
+Output List:
+4
+3
+2
+1
+File Table:
+
+Execution Stack:
+(WHILE(v>0) (print(v);v=v-1))
+print(v)
+Symbol Table:
+v->0
+Heap:
+Output List:
+4
+3
+2
+1
+File Table:
+
+Execution Stack:
+print(v)
+Symbol Table:
+v->0
+Heap:
+Output List:
+4
+3
+2
+1
+File Table:
+
+Execution Stack:
+Symbol Table:
+v->0
+Heap:
+Output List:
+4
+3
+2
+1
+0
+File Table:
+
