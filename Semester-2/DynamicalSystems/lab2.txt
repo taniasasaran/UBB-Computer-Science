@@ -1,0 +1,52 @@
+t=var("t")
+x=function("x")(t)
+eq=diff(x, t, 1)+x==0
+show(desolve(eq, x, ics=[0, 1]))
+
+eq=diff(x, t, 1)+x**2==0
+show(desolve(eq, x, ics=[0, 1]))
+show(desolve(eq, x))
+
+x=function("x")(t)
+y=function("y")(t)
+eq1=diff(x,t,1)-y==0
+eq2=diff(y,t,1)+x==0
+desolve_system([eq1, eq2], [x, y], ivar=t)
+
+desolve_system([eq1, eq2], [x, y], ics=[0, 0, 1], ivar=t)  (ics -- t, x(t), y(t))
+
+t=var("t")
+x=function("x")(t)
+y=function("y")(t)
+z=function("z")(t)
+eq1=diff(x,t,1)-y==0
+eq2=diff(y,t,1)+x==0
+eq3=diff(z,t,1)-x-y==0
+desolve_system([eq1, eq2, eq3], [x, y, z], ics=[0, 0, 1, 1], ivar=t)
+
+sol=desolve_system([eq1, eq2], [x, y], q(t) = sol[0].rhs()
+l(t) = sol[1].rhs()
+parametric_plot((q(t), l(t)), (t,0,10)))
+q(t) = sol[0].rhs()
+l(t) = sol[1].rhs()
+parametric_plot((q(t), l(t)), (t,0,10)) -- (x(t),y(t)), (t,start,end)
+plot_vector_field((q(t), l(t)), (t,0,10))
+
+u=var("u")
+v=var("v")
+VF = plot_vector_field([u-v, u+v], [u, -100, 100], [v, -100, 100])
+plot(VF)
+
+t=var("t")
+x=function("x")(t)
+y=function("y")(t)
+eq1=diff(x,t,1)==x-y
+eq2=diff(y,t,1)==x+y
+sol=desolve_sys tem([eq1, eq2], [x, y], ics=[0, 0, 1])
+q(t) = sol[0].rhs()
+l(t) = sol[1].rhs()
+u=var("u")
+v=var("v")
+p1 = plot_vector_field([u-v, u+v], [u, -20, 20], [v, -20, 20])
+p2 = parametric_plot((q(t), l(t)), (t,0,3))
+show(p1+p2)

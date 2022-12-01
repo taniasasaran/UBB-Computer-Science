@@ -1,0 +1,22 @@
+from sage.symbolic.integration.integral import indefinite_integral
+t = var("t")
+x = function("x")(t)
+x0=var("x0")
+f = function("f")(t, x) == diff(x, t, 1)
+t1=var("t1")
+t0 = var("t0")
+c=var("c")
+def mysolver(f, x0, t0, t1):
+    x=indefinite_integral(f,t)
+    show(x)
+    return x(t1)
+mysolver(t-4, 0, 1, 9)    //    mysolver(5*e**(5*t), 0, 1, 9)
+
+
+
+t = var("t")
+x = function("x")(t)
+f = function("f")(t, x) == diff(x, t, 1) - x(t)
+t0 = var("t0")
+x(t0) == 1
+eulers_method(f, 0, 1, 1, 10)

@@ -1,0 +1,96 @@
+
+LAB1
+
+Ex4:
+x=SR.var('x')
+f1=2*pow(x,2)/(pow(x,3)-1)
+f2=3*x/(pow(x,2)-1)
+f1.factor()
+f2.factor()
+f=f1+f2
+f.factor()
+
+Ex15:
+a)
+t=var('t')
+x(t)=2*cos(t/3)
+y(t)=2*sin(t/3)
+parametric_plot((y(t), x(t)),(t, -pi/2, pi/2))
+b)
+t=var('t')
+x(t)=2*cos(4*t)
+y(t)=2*sin(4*t)
+parametric_plot((y(t), x(t)),(t, -pi/2, pi/2))
+
+#______________________________________________#
+
+LAB2
+
+Ex2
+
+t=var('t')
+x= function('x')(t)
+eqd=diff(x,t)+t*x==0
+desolve(eqd,x)
+output:
+_C*e^(-1/2*t^2)
+
+
+Ex12:
+
+t=var('t')
+x=function('x')(t)
+eqd=diff(x,t,2)+x==1
+desolve(eqd,x,ics=[0,0,pi,0])
+output:[]
+
+#______________________________________________#
+
+LAB4
+
+Ex1
+1)
+A=matrix([[0,-2, 0], [1,-2, 0], [0, 0,-2]])
+determinant=A.det()
+inverse=A^(-1)
+charPol=A.charpoly()
+eigenVal=A.eigenvalues()
+eigenVec=A.eigenvectors_right()
+
+2)
+A=matrix([[0,-2, 0], [1,-2, 0], [0, 0,-2]])
+u=vector([0,0,1])
+L=-2
+check=A*u==L*u
+check
+
+3)
+A=matrix([[0,-2, 0], [1,-2, 0], [0, 0,-2]])
+u=vector([-i+1,1,0])
+L=-1+i
+check=A*u==L*u
+check
+
+4)
+A=matrix([[0,-2, 0], [1,-2, 0], [0, 0,-2]])
+u=vector([-1-i,1,0])
+L=-1-i
+check=A*u==L*u
+check
+
+5)
+A=matrix([[0,-2, 0], [1,-2, 0], [0, 0,-2]])
+u1=vector([0,0,1])
+u2=vector([-1+i,1,0])
+u3=vector([-1-i,1,0])
+P=matrix([u1,u2,u3])
+P
+
+#______________________________________________#
+
+LAB5
+
+II
+Ex3
+
+
