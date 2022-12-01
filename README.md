@@ -3,21 +3,21 @@
 ## This repository contains all of my work during the BBU bachelor's in Computer Science program
 
 - Semester 1
-  * [Algebra](#Algebra)
+  * [Algebra](Semester-1/ALGEBRA)
   * Calculus
-  * [Computational Logic](#Computational-Logic)
-  * [Computer Systems Architecture](#Computer-Systems-Architecture)
-  * [Fundamentals of Programming](#Fundamentals-of-Programming)
-- [Semester 2](#Semester-2)
-  * [Data Structures and Algorithms](#Data-Structures-and-Algorithms)
-  * [Dynamical Systems](#Dynamical-Systems)
-  * [Geometry](#Geometry)
-  * [Graphs](#Graphs)
-  * [Object Oriented Programming](#Object-Oriented-Programming)
-  * [Operating Systems](#Operating-Systems)
-- [Semester 3](#Semester-3)
-  * [Advanced Programming Methods](#Advanced-Programming-Methods)
-  * [Computer Networks](#Computer-Networks)
-  * [Databases](#Databases)
-  * [Functional and Logical Programming](#Functional-and-Logical-Programming)
-  * [Probabilities and Statistics](#Probabilities-and-Statistics)
+  * [Computational Logic](Semester-1/LOGIC)
+  * [Computer Systems Architecture](Semester-1/ASC)
+  * [Fundamentals of Programming](Semester-1/FP)
+- Semester 2
+  * [Data Structures and Algorithms](Semester-2/DSA)
+  * [Dynamical Systems](Semester-2/DynamicalSystems)
+  * Geometry
+  * [Graphs](Semester-2/GRAPHS)
+  * [Object Oriented Programming](Semester-2/OOP)
+  * [Operating Systems](Semester-2/OS)
+- Semester 3
+  * [Advanced Programming Methods](Semester-3/MAP)
+  * [Computer Networks](Semester-3/ComputerNetworks)
+  * [Databases](Semester-3/DB)
+  * [Functional and Logical Programming](Semester-3/PLF)
+  * [Probabilities and Statistics](Semester-3/PS)
