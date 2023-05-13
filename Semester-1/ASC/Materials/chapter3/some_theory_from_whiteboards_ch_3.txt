@@ -1,0 +1,37 @@
+- main task of an assembler = generating the corresponding bytes 
+- at any given moment ONLY ONE segment of every type may be ACTIVE 
+- in 16 bits programming the segment registers CS, DS, SS, ES contained the STARTING ADDRESSES of the currently active  segments 
+- in 32 bits programming the segment registers CS, DS, SS, ES contain the values of the SELECTORS of the currently active segments
+- at any given moment during run time the CS:EIP combination of registers expresses /contain the address of the currently executed instruction 
+- these values are handled exclusively by BIU
+- an assembly language instruction doesn’t support/allow both of its explicit operands to be from the RAM memory 
+- that is because BIU may "bring" only one memory operand at a time (for 2 memory operands we would need 2 BIU, 2 segment registers sets etc) 
+
+
+offset_address = [ base] + [ index × scale ] + [ constant ]
+			(SIB)	           (displacement + immediate)
+
+[prefixes] + code + [ModeR/M] + [SIB] + [displacement] + [immediate]
+
+- if Modr/m tells us that we have a register operand the next 3 fields from the internal format formula are absent  (because if the operand is a register it can NOT be in the same time also a memory operand or an immediate value )
+- if Modr/m tells us that we have a memory operand => SIB byte is mandatory, followed MAYBE by displacement and/or immediate  
+Mov cs, [var] - forbidden
+Mov eip, eax - forbidden
+
+For an instruction there are 3 ways to express a required operand:
+(operands specification modes)
+
+-	 register mode, if the required operand is a register; mov ax, bx
+-	 immediate mode, when we use directly the operand’s value (not its address and neither a register holding it); mov eax,2
+-	 memory addressing mode, if the operand is located somewhere in memory.
+
+So offset_address is obtained from the following (maximum) four elements:
+-	the content of one of the registers EAX, EBX, ECX, EDX, EBP, ESI, EDI or ESP as base;
+-	the content of one of the registers EAX, EBX, ECX, EDX, EBP, ESI or EDI as index;
+-	scale to multiply the value of the index register with 1, 2, 4 or 8;
+-	the value of a numeric constant, on a byte or on a doubleword.
+
+From here results the following modes to address the memory:
+-	direct addressing, when only the constant is present;
+-	based addressing, if in the computing one of the base registers is present;
+-	scale-indexed addressing, if in the computing one of the index registers is present.

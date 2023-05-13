@@ -1,0 +1,27 @@
+Number/(epsilon that approaches zero) = a result that aproaches infinit !!! – this is a correct mathematical operations  
+
+Number/0 is assembly language will issue a DIVIDE OVERFLOW (ZERO DIVIDE, DIVISION by ZERO) because infinit doesn’t fit a byte, a word, a doubleword 
+If I intend to make 1002/3 =… the assembly language will issue a DIVIDE OVERFLOW because 334 doesn’t fit a byte. 
+But from above the processor already considered that 3 messages equivalent… so, it still will issue the same things …. Why ? because from  the mP point of view it the same… 
+
+IADD = ADD, ISUB = SUB … because they work exactly the same way in base 2. Addition and subtraction are VALID - UNDER BOTH INTERPRETATIONS SIMULTANEOUSLY !!!!
+When a base 2 addition or subtraction is performed, in fact 2 different simultaneously operations in base 10 are performed !! 
+One for the unsigned interpretation (and that is why we need CF) and the other one for the signed interpretation (and that is why we need OF). 
+
+-	Why DO I NEED IMUL AND IDIV ?
+Because in contrast from addition and subtraction (which operate identically in base 2 independently of interpretation – signed or unsigned) 
+multiplication and division function DIFFERENTLY ! Here there is mandatory to specify the interpretation of the operands (signed or unsigned) 
+BEFORE the actual operation is performed… and the microprocessor distinguish that by using DIV vs IDIV and MUL vs. IMUL
+
+In case of addition and subtraction there is no need to make such a distinction before performing it, so the decision regarding a possible 
+interpretation (signed or unsigned) is taken only AFTER the actual operation is performed. That is why we do NOT need IADD or ISUB…
+
+Registers – storage capacities – very small in terms of sizes (8,16, 32 or 64 bits) but very fast as access speed used for temporary store 
+the operands (data, commands codes, ADDRESSES  !!!!!!!! ) with which a processor currently.
+
+Computer/processor “on N bits”:
+a).software perspective – the size of the memory word = the size of the (majority of) the registers (in our case = 32 bits)
+b).engineering perspective – the size of the communication buses (channels) - ABUS, CBUS, DBUS
+
+RAM (Random Access Memory) – who is RANDOM ?
+-	The access time at any given location from the RAM is THE SAME independently of the position (randomely far from the beginning of the memory…)
