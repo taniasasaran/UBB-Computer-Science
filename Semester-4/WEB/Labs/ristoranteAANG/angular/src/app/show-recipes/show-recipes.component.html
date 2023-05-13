@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="details">
+    <h1>Recipes</h1>
+
+    <input
+      type="text"
+      placeholder="Type:"
+      #type
+      (input)="refresh(type.value, name.value)"
+    />
+
+    <input
+      type="text"
+      placeholder="Name:"
+      #name
+      (input)="refresh(type.value, name.value)"
+    />
+
+    <button class="add" (click)="navigateToAdd()">Add new recipe</button>
+  </div>
+  <table>
+    <tr>
+      <th>NAME</th>
+      <th>TYPE</th>
+      <th>AUTHOR</th>
+      <th>INGREDIENTS</th>
+      <th>INSTRUCTIONS</th>
+      <th>IMAGE</th>
+      <th>ACTION</th>
+    </tr>
+    <tr *ngFor="let recipe of recipes">
+      <td>{{ recipe.rname }}</td>
+      <td>{{ recipe.rtype }}</td>
+      <td>{{ recipe.rauthor }}</td>
+      <td>{{ recipe.ringredients }}</td>
+      <td>{{ recipe.rinstructions }}</td>
+      <td>{{ recipe.rimage }}</td>
+      <td>
+        <button id="updateButton" (click)="navigateToUpdate(recipe.recipeID)">
+          Update
+        </button>
+        <br />
+        <button (click)="navigateToDelete(recipe.recipeID)" id="deleteButton">
+          Delete
+        </button>
+        <br />
+      </td>
+    </tr>
+  </table>
+</div>

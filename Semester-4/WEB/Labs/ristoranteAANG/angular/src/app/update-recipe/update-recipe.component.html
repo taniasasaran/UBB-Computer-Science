@@ -1,0 +1,47 @@
+<div class="container">
+  <h1>Update Recipe</h1>
+  <p>
+    <b
+      >Please fill this form and submit to update the recipe from the
+      database.</b
+    >
+  </p>
+
+  <div class="formWrapper">
+    <input type="text" name="name" placeholder="Name:" #name /> <br />
+    <input type="text" name="type" placeholder="type:" #type /> <br />
+    <input type="text" name="author" placeholder="author:" #author /> <br />
+    <input
+      type="text"
+      name="ingredients"
+      placeholder="ingredients:"
+      #ingredients
+    />
+    <br />
+    <input
+      type="text"
+      name="instructions"
+      placeholder="instructions:"
+      #instructions
+    />
+    <br />
+    <input type="text" name="image" placeholder="image:" #image /> <br />
+    <div class="button_container">
+      <button
+        (click)="
+          updateRecipe(
+            name.value,
+            type.value,
+            author.value,
+            ingredients.value,
+            instructions.value,
+            image.value
+          )
+        "
+      >
+        Update Recipe
+      </button>
+      <button (click)="onCancel()">Cancel</button>
+    </div>
+  </div>
+</div>
