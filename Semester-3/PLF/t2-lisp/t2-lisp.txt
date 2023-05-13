@@ -1,0 +1,45 @@
+Dandu-se o lista liniara, sa se stearga toate secventele de valori numerice consecutive.
+(1 2 C 4 6 7 8 I 10 J) -> (C 4 I 10 J)
+(1 2 3 5 7 8 9 10) -> (5)
+(A B 4 C S 5 6 B) -> (A B 4 C S B)
+(1 A 2 B 3 4 C D 5 6 7 E) -> (1 A 2 B C D E)
+
+; delCons (l, f) =    f= 0-o sters ultimul; 1-nu o sters ultimul
+;    (), if l-empty
+;    delCons(l2..ln,1) if l1+1=l2
+;    delCons(l2..ln,0) if f=1
+;    l1 U delCons(l2..ln,0)
+
+(defun deleteConsecutive (l flag)
+    (cond
+        ((null l) nil)
+        ((and (numberp (car l))(numberp (cadr l))(= (+ 1 (car l)) (cadr l))) (deleteConsecutive (cdr l) 1))
+        ((= flag 1) (deleteConsecutive (cdr l) 0))
+        (t (cons (car l) (deleteConsecutive (cdr l) 0)))
+))
+
+(defun delCons(l) (deleteConsecutive l 0))
+
+(defun test ()
+    (assert
+        (and
+          (equal '(C 4 I 10 J) (delCons '(1 2 C 4 6 7 8 I 10 J)))
+          (equal '(5) (delCons '(1 2 3 5 7 8 9 10)))
+          (equal '(A B 4 C S B) (delCons '(A B 4 C S 5 6 B)))
+          (equal '(1 A 2 B C D E) (delCons '(1 A 2 B 3 4 C D 5 6 7 E)))
+         )
+     )
+)
+
+(test)
+
+
+
+
+
+
+
+
+
+
+

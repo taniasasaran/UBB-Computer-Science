@@ -1,0 +1,115 @@
+1. What is the primary function of a router in a computer network?
+a) To provide security for the network
+b) To connect multiple devices to the internet
+c) To transmit data between devices on a network
+d) To store data
+e) To process data
+Answer: c) To transmit data between devices on a network
+
+2. Which of the following is not a type of computer network?
+a) Local Area Network (LAN)
+b) Wide Area Network (WAN)
+c) Metropolitan Area Network (MAN)
+d) Personal Area Network (PAN)
+e) none of the above
+Answer: e) none of the above
+
+3. What is the process of a computer receiving data from the network called?
+A) Transmission
+B) Routing
+C) Receiving
+D) Packet switching
+E) Acquring
+Correct answer: C) Receiving
+
+4. What is the main function of a router?
+A) To connect devices to the internet
+B) To transmit data between devices
+C) To forward data packets to their destination
+D) To store data
+Correct answer: C) To forward data packets to their destination
+
+5. What is the process of converting data into a form that can be transmitted over a network called?
+A) Encoding
+B) Encription
+C) Compression
+D) Packetization
+Correct answer: A) Encoding
+
+6. What is the main function of a switch in a network?
+A) To forward data packets to their destination
+B) To connect devices to the internet
+C) To store data
+D) To transmit data between devices
+Correct answer: D) To transmit data between devices
+
+7. Which of the following protocols is connection-oriented?
+a. TCP 
+b. UDP
+answer: a) tcp
+
+8. Which of the following protocols is used to transmit email over the internet?
+a. SMTP-correct
+b. FTP
+c. HTTP
+d. UDP
+
+9. Which of the following protocols is used to retrieve web pages from a server?
+a. IMCP
+b. UDP
+c. HTTP-correct
+d. TCP
+
+10. What is the IP class for a subnet mask of 255.0.0.0?
+A) Class A
+B) Class B
+C) Class C
+D) Class D
+Answer: A) Class A
+
+11. What is the IP class for a subnet mask of 0.0.0.0?
+A) Class A
+B) Class B
+C) Class C
+D) Class D
+Answer: D) Class D
+
+12. Which of the following is true about the RIP protocol?
+A. It is a distance vector routing protocol.
+B. It is a link state routing protocol.
+C. It is a hybrid routing protocol.
+D. It is a path vector routing protocol.
+Answer: B
+
+13. Which of the following is true about the IP protocol?
+A. It is a distance vector routing protocol.
+B. It is a link state routing protocol.
+C. It is a hybrid routing protocol.
+D. It is a path vector routing protocol.
+Answer: A
+
+14. Which of the following is a layer in the OSI model?
+a) Physical layer
+b) Data link layer
+c) Network layer
+d) Transport layer
+e) Application layer
+f) Presentation layer
+g) Session layer
+h) all of the above
+Answer: all answers
+
+15. Which of the following protocols has a smaller header size?
+a. TCP
+b. UDP - correct
+c. they have the same header size
+
+16. The S from HTTPS comes from:
+a. secure version of HTTP - correct
+b. shorter header than the HTTP
+c. none of the above
+
+
+
+
+

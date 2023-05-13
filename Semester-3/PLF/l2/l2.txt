@@ -1,0 +1,75 @@
+;                    | 1 if x=atom and lvl=k
+; nrnodes(x,lvl,k) = | 0 if x=atom and lvl!=k
+;                    | sum(nrnodes(xi,lvl+1,k)) i=1,n if x=list, x=x1x2...xn
+
+(defun nrnodes (x lvl k)
+    (cond
+        ((and (atom x) (= lvl k)) 1)
+        ((atom x) 0)
+        (t (apply '+ (mapcar #'(lambda (a) (nrnodes a (+ lvl 1) k)) x)))
+    )
+)
+
+; mainnrnodes(x,k) = nrnodes(x,-1,k) --we start at lvl -1 because in the pdf root level is 0
+
+(defun mainnrnodes (x k) (nrnodes x -1 k))
+
+(defun test ()
+    (assert
+        (and
+            (equal 0 (mainnrnodes nil 0))
+            (equal 3 (mainnrnodes '(a (b (c)) (d) (e (f))) 1))
+            (equal 2 (mainnrnodes '(a (b (c)) (d) (e (f))) 2))
+	    (equal 1 (mainnrnodes '(a (b (c)) (d) (e (f))) 0))
+            (equal 0 (mainnrnodes '(a (b (c)) (d) (e (f))) 3))
+        )
+    ))  
+(test)
+
+;(print (mainnrnodes '(a (b (c)) (d) (e (f))) 1))
+;(print (mainnrnodes '() 0))
+
+
+(defun nodesK (l lvl k)
+    (cond
+        ((null l) l)
+        ((and (atom (car l)) (= lvl k)) (cons (car l) (nodesK (cdr l) lvl k)))
+        ((atom (car l)) (nodesK (cdr l) lvl k))
+        (t (apply 'append (mapcar #'(lambda (a) (nodesK a lvl (+ 1 k))) l)))
+        (t (append (nodesK (car l) lvl (+ 1 k)) (nodesK (cdr l) lvl k)))
+    )
+)
+
+(defun nodesK (l lvl k)
+    (cond
+        ((null l) l)
+        ((and (atom (car l)) (= lvl k)) (cons (car l) (nodesK (cdr l) lvl k)))
+        ((atom (car l)) (nodesK (cdr l) lvl k))
+        (t (mapcan #'(lambda (l)  (nodesK l (- lvl 1) k))  l))
+        ;(t (append (nodesK (car l) lvl (+ 1 k)) (nodesK (cdr l) lvl k)))
+    )
+)
+; alta varianta: sa pastrez "numele" atomului/elementului de pe levelul k si pe restul(atoms) sa le fac nil
+; in lambda sa selectez doar elementele care nu sunt nil
+
+(defun mainnodesK (l lvl) (nodesK l lvl 1))
+
+(defun test2 ()
+    (assert
+        (and
+            (equal nil      (mainnodesK '() 0))
+            (equal '(C F)   (mainnodesK '(a (b (c)) (d) (e (f))) 3))
+            (equal '(B D E) (mainnodesK '(a (b (c)) (d) (e (f))) 2))
+	        (equal '(A)     (mainnodesK '(a (b (c)) (d) (e (f))) 1))
+            (equal nil      (mainnodesK '(a (b (c)) (d) (e (f))) 0))
+        )
+    ))  
+(test2)
+
+(print (mainnodesK '(a (b (c)) (d) (e (f))) 3))  ;cf
+(print (mainnodesK '(a (b (c)) (d) (e (f))) 2))  ;bde
+(print (mainnodesK '(a (b (c)) (d) (e (f))) 1))  ;a
+(print (mainnodesK '(a (b (c)) (d) (e (f))) 0))  ;nil
+(print (mainnodesK '(a (b (c)) (d) (e (f))) -1))  ;nil
+
+(print (mainnodesK '() 0)) ;nil

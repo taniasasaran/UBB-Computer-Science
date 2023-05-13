@@ -1,0 +1,68 @@
+TEORETIK PRAKTIKER MAI VEDE M
+
+####Overwrite vs Override vs Overload####
+To "overwrite" something is to put something else in
+its place, destroying the thing overwritten. To "override"
+something is to cause something else to operate instead of
+it without harming or changing the thing overridden.
+Overload means multiple methods of the same name in
+the same class, and all methods work in different ways.
+
+####Static vs Non static####
+Static variables or fields belong to the class, and
+not to any object of the class. A static variable is
+initialized when the class is loaded at runtime. 
+
+####Interface vs Abstract class####
+An abstract class allows you to create functionality
+that subclasses can implement or override. An interface
+only allows you to define functionality, not implement it.
+
+####Reference vs Primitive####
+A primitive variable's information is stored
+ as the value of that variable, whereas a reference 
+variable holds a reference to information related to
+that variable. Primitive types are boolean, byte, char,
+short, int, long, float and double. All other types
+are reference types, so classes.
+
+####Generics####
+Generics means parameterized types.
+Generic methods and classes can be built for a more general use. 
+
+####Generic Arrays####
+Arrays store and check type information at runtime.
+Generics, however, check for type errors at compile-time
+and don't have type information at runtime.
+
+####Wildcards####
+In generic code, the question mark (?), called the wildcard,
+represents an unknown type. The wildcard can be used in a
+variety of situations: as the type of a parameter, field,
+or local variable; sometimes as a return type (though it
+is better programming practice to be more specific).
+
+####Buffers####
+What are buffers in Java?
+A buffer is a linear, finite sequence of elements of a specific
+primitive type. Aside from its content, the essential properties 
+of a buffer are its capacity, limit, and position.
+
+####Multithreading####
+Multithreading is the ability of a program or an operating system 
+to enable more than one user at a time without requiring multiple 
+copies of the program.
+
+####Possible states of a thread####
+NEW. A thread that has not yet started is in this state.
+RUNNABLE. A thread executing in the Java virtual machine is in this
+state.
+BLOCKED. A thread that is blocked waiting for a monitor lock is in 
+this state.
+WAITING. ...
+TIMED_WAITING. ...
+TERMINATED.
+
+####Thread sync####
+Synchronization in Java is the capability to control the access 
+of multiple threads to any shared resource.
