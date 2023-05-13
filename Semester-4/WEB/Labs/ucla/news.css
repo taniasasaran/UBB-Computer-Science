@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+  
+.ucla {
+  background-color: #3183bd;
+  /* background: -webkit-linear-gradient(right, yellow, cyan); */
+}
+  
+.navul {
+  background-color: #fff;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+.uclaimg {
+    max-height: 40px;
+    margin: 0px 0px 0px 180px ;
+}
+
+.three_girls {
+  width: 800px;
+  padding: 0px 0px 0px 500px;
+}
+
+.figure-caption-credit {
+  font-size: 11px;
+  font-style: italic;
+  margin-left: 1150px;
+}
+
+.figure-caption-text {
+  font-size: 13.5px;
+  margin-left: 500px;
+}
+
+.article-card-body {
+  width: 400px;
+  padding: 20px;
+  margin: 170px;
+  position: absolute;
+  background-color: #fff;
+}
+
+.article-card-text {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.article-card-title{
+  color: #3E3E3E;
+  font-size: 35px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.article-card-topic a {
+  background-color: gold;
+  padding: 5px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.newsroom {
+  color: #3E3E3E;
+  font-size: 50px;
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 150px;
+}
+
+.cat, .newsmedia{
+  position: relative;
+  color: #3183bd;
+  font-weight: 600;
+  font-size: larger;
+}
+
+.cat{
+  margin-left: 580px;
+}
+
+.newsmedia, .search img{
+  margin-left: 10px;
+}
+
+.search img{
+  height: 25px;
+  position: relative;
+}

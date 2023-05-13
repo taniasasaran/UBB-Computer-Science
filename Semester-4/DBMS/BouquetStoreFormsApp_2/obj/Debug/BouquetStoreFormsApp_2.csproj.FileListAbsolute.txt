@@ -1,0 +1,18 @@
+C:\Users\TANIA\Source\Repos\BouquetStoreFormsApp_2\bin\Debug\BouquetStoreFormsApp_2.exe.config
+C:\Users\TANIA\Source\Repos\BouquetStoreFormsApp_2\bin\Debug\BouquetStoreFormsApp_2.exe
+C:\Users\TANIA\Source\Repos\BouquetStoreFormsApp_2\bin\Debug\BouquetStoreFormsApp_2.pdb
+C:\Users\TANIA\Source\Repos\BouquetStoreFormsApp_2\obj\Debug\BouquetStoreFormsApp_2.csproj.AssemblyReference.cache
+C:\Users\TANIA\Source\Repos\BouquetStoreFormsApp_2\obj\Debug\BouquetStoreFormsApp_2.Properties.Resources.resources
+C:\Users\TANIA\Source\Repos\BouquetStoreFormsApp_2\obj\Debug\BouquetStoreFormsApp_2.csproj.GenerateResource.cache
+C:\Users\TANIA\Source\Repos\BouquetStoreFormsApp_2\obj\Debug\BouquetStoreFormsApp_2.csproj.CoreCompileInputs.cache
+C:\Users\TANIA\Source\Repos\BouquetStoreFormsApp_2\obj\Debug\BouquetStoreFormsApp_2.exe
+C:\Users\TANIA\Source\Repos\BouquetStoreFormsApp_2\obj\Debug\BouquetStoreFormsApp_2.pdb
+D:\Projects\Visual Studio 2019\BouquetStoreFormsApp_2\bin\Debug\BouquetStoreFormsApp_2.exe.config
+D:\Projects\Visual Studio 2019\BouquetStoreFormsApp_2\bin\Debug\BouquetStoreFormsApp_2.exe
+D:\Projects\Visual Studio 2019\BouquetStoreFormsApp_2\bin\Debug\BouquetStoreFormsApp_2.pdb
+D:\Projects\Visual Studio 2019\BouquetStoreFormsApp_2\obj\Debug\BouquetStoreFormsApp_2.csproj.AssemblyReference.cache
+D:\Projects\Visual Studio 2019\BouquetStoreFormsApp_2\obj\Debug\BouquetStoreFormsApp_2.Properties.Resources.resources
+D:\Projects\Visual Studio 2019\BouquetStoreFormsApp_2\obj\Debug\BouquetStoreFormsApp_2.csproj.GenerateResource.cache
+D:\Projects\Visual Studio 2019\BouquetStoreFormsApp_2\obj\Debug\BouquetStoreFormsApp_2.csproj.CoreCompileInputs.cache
+D:\Projects\Visual Studio 2019\BouquetStoreFormsApp_2\obj\Debug\BouquetStoreFormsApp_2.exe
+D:\Projects\Visual Studio 2019\BouquetStoreFormsApp_2\obj\Debug\BouquetStoreFormsApp_2.pdb

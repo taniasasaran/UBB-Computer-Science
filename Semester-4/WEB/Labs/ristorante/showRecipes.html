@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mi ristorante La vitta e bella muy bien</title>
+    <link rel="stylesheet" type="text/css" href="showRecipes.css" />
+    <script src="utils/jquery-3.6.0.js"></script>
+    <script src="showRecipes.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="details">
+        <h1>Recipes</h1>
+
+        <input type="text" placeholder="Type:" id="type" />
+
+        <input type="text" placeholder="Name:" id="name" />
+
+        <button class="add" onclick="window.location.href='addRecipe.html'">
+          Add new recipe
+        </button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>NAME</th>
+            <th>TYPE</th>
+            <th>AUTHOR</th>
+            <th>INGREDIENTS</th>
+            <th>INSTRUCTIONS</th>
+            <th>IMAGE</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+header {
+    position: relative;
+    background-color: aliceblue;
+}
+
+body header div div img {
+    background: #2774AE;
+    display: block;
+    width: 100px;
+    /* height: 40px; */
+    margin: 30px 30px 24px 24px;
+    /* padding: 10px 13px; */
+    position: relative;
+    /* height: 20px; */
+}
+
+body {
+    position: relative;
+    background-color: #005587;
+}

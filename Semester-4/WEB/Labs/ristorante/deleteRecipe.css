@@ -1,0 +1,53 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    margin-left: auto;
+    margin-right: auto;
+    color: indigo;
+}
+
+.container {
+    height: fit-content;
+    width: 50%;
+    border-radius: 10px;
+    background: lavender;
+    color: indigo;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+}
+
+button {
+    margin-top: 20px;
+    border: 2px solid indigo;
+    border-radius: 7px;
+    background: lavender;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 24px;
+}
+
+form {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-block-end: 1em;
+
+}
+
+.button_container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto;
+}

@@ -1,0 +1,44 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add New Recipe</title>
+    <link rel="stylesheet" type="text/css" href="addRecipe.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Create Recipe</h1>
+      <p>
+        <b
+          >Please fill this form and submit to add the recipe to the
+          database.</b
+        >
+      </p>
+
+      <form action="addRecipe.php" method="post">
+        <input type="text" name="name" placeholder="Name:" /> <br />
+        <input type="text" name="type" placeholder="Type:" /> <br />
+        <input type="text" name="author" placeholder="Author:" /> <br />
+        <input type="text" name="ingredients" placeholder="Ingredients:" />
+        <br />
+        <input type="text" name="instructions" placeholder="Instructions:" />
+        <br />
+        <input type="text" name="image" placeholder="Image:" /> <br />
+        <div class="button_container">
+          <button
+            type="submit"
+            onclick="window.location.href='showRecipes.html'"
+          >
+            Add Recipe
+          </button>
+          <button
+            type="reset"
+            onclick="window.location.href='showRecipes.html'"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
