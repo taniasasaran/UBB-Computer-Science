@@ -1,15 +1,14 @@
 public class SymbolTable {
-
     private Integer size;
     private HashTable hashTable;
 
-
     public SymbolTable(Integer size){
-        hashTable = new HashTable(size);
+        this.size = size;
+        this.hashTable = new HashTable(size);
     }
 
-    public String findByPos(Pair pos){
-        return hashTable.findByPos(pos);
+    public String get(Pair pos){
+        return hashTable.get(pos);
     }
 
     public HashTable getHashTable(){
@@ -24,16 +23,15 @@ public class SymbolTable {
         return hashTable.getNumberOfElements();
     }
 
-    public Pair findPositionOfTerm(String term){
-        return hashTable.findPositionOfTerm(term);
+    public Pair getPosition(String elem){
+        return hashTable.getPosition(elem);
     }
 
-    public boolean containsTerm(String term){
-        return hashTable.containsTerm(term);
+    public boolean contains(String elem){
+        return hashTable.contains(elem);
     }
 
-    public boolean add(String term){
-        return hashTable.add(term);
+    public boolean add(String elem){
+        return hashTable.add(elem);
     }
-
 }

@@ -20,7 +20,7 @@ public class HashTable {
         return sum_chars % size;
     }
 
-    public String findByPos(Pair pos) {
+    public String get(Pair pos) {
         if (this.table.size() <= pos.getFirst() || this.table.get(pos.getFirst()).size() <= pos.getSecond()) {
             throw new IndexOutOfBoundsException("Invalid position");
         }
@@ -39,12 +39,12 @@ public class HashTable {
         return count;
     }
 
-    public Pair findPositionOfTerm(String term) {
-        int pos = hash(term);
+    public Pair getPosition(String elem) {
+        int pos = hash(elem);
         if (!table.get(pos).isEmpty()) {
             ArrayList<String> elems = this.table.get(pos);
             for (int i = 0; i < elems.size(); i++) {
-                if (elems.get(i).equals(term)) {
+                if (elems.get(i).equals(elem)) {
                     return new Pair(pos, i);
                 }
             }
@@ -52,17 +52,17 @@ public class HashTable {
         return null;
     }
 
-    public boolean containsTerm(String term) {
-        return this.findPositionOfTerm(term) != null;
+    public boolean contains(String elem) {
+        return this.getPosition(elem) != null;
     }
 
-    public boolean add(String term) {
-        if (containsTerm(term)) {
+    public boolean add(String elem) {
+        if (contains(elem)) {
             return false;
         }
-        Integer pos = hash(term);
+        Integer pos = hash(elem);
         ArrayList<String> elems = this.table.get(pos);
-        elems.add(term);
+        elems.add(elem);
         return true;
     }
 
