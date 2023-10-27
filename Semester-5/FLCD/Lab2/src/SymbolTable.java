@@ -31,7 +31,7 @@ public class SymbolTable {
         return hashTable.contains(elem);
     }
 
-    public boolean add(String elem){
+    public Pair add(String elem){
         return hashTable.add(elem);
     }
 }

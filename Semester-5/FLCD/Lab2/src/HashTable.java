@@ -56,14 +56,16 @@ public class HashTable {
         return this.getPosition(elem) != null;
     }
 
-    public boolean add(String elem) {
-        if (contains(elem)) {
-            return false;
-        }
+    public Pair add(String elem) {
         Integer pos = hash(elem);
         ArrayList<String> elems = this.table.get(pos);
+        for (int i = 0; i < elems.size(); i++) {
+            if (elems.get(i).equals(elem)) {
+                return new Pair(pos, i);
+            }
+        }
         elems.add(elem);
-        return true;
+        return new Pair(pos, elems.size() - 1);
     }
 
     @Override
