@@ -1,0 +1,45 @@
+p1.t
+
+num A' num B' num C' num M'
+cit(A)' cit(B)' cit(C)'
+dc A be B : dc A be C : M<-A' ::
+dc B be C : dc B be A : M<-B' ::
+dc C be A : dc C be B : M<-C' ::
+scr(M)'
+st
+
+
+p2.t
+
+num A' num B' num C' num M'
+cit(A)' cit(B)' cit(C)'
+dc A se B si A se C : M<-A' :
+dc B se C si B se A : M<-B' :
+dc C se A si C se B : M<-C' :
+scr(M)'
+st
+
+
+p3.t
+
+num S'
+S<-0'
+num^20^ NUMERE'
+NUMERE <- ^1,2,3,5,7^'
+pt(num i' i<-0' i<-i+1)
+: S <- S + NUMERE^i^' :
+scr(S)'
+st
+
+p2err.t
+
+num A' num B' num C' num M' num x'
+cit(A)' cit(B)' cit(C)'
+dc A se B si A se C : M<-A' ;
+dc B se C si B se A : M<-B' :
+dc C se A si C se B : M<-C' :
+scr(M)'
+st
+
+
+
