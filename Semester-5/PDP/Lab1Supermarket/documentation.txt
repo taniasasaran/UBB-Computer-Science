@@ -1,0 +1,26 @@
+The project is designed to take information from "products.txt" file that represent the items on stock in the supermarket, formatted like this:
+'number_of_items' -first line
+'name of item 1' 'number of items on stock' 'price of item 1' -second line
+'name of item 2' 'number of items on stock' 'price of item 2' -third line
+...
+'name of item N' 'number of items on stock' 'price of item N' -N+1 line
+
+After that we randomly generate some bills with 1-5 product, each with quantity=(1,...,5)(1 in the project sent) which are stored in a list and every thread is assigned a list of bills sent via the parameters of the function.
+At every 3rd thread, we create another one which does the store check.
+checkEverything is a function that loops through all the products and all the consumed bills and checks if the products are out of stock of if the total money or the remained quantity of the product is unjustified.
+parseBill is a function that allows every thread to modify the stocks of every item and uses a mutex associated to that specific product to update its soldQuantity.
+Also, the thread locks total amount of money to update it with the processed bill amount.
+The ProcessBillThread uses, in the parseBill function, and read-locks a RWlock and the CheckEverythingThread uses, in the checkEverything function, the same RWlock which is write-locked everytime the checkEverything function is ran, to prevent ProcessBillThreads to make any modifications to the data while the checking is done.
+
+locks used:
+everythingMutex - ReadWriteLock - used for checking
+moneyMutex - ReentrantLock - used when processing a bill, to add the billAmount to the totalAmount of the supermarket
+productMutex - ReentrantLock - used when processing a bill, to update the soldQuantity of the product
+
+4000 products, 40000 bills
+8 threads: 1629ms
+4 threads: 2779ms
+2 threads: 5236ms
+1 thread : 9586ms
+
+
