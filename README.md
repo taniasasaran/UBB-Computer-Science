@@ -21,3 +21,12 @@
   * [Databases](Semester-3/DB)
   * [Functional and Logical Programming](Semester-3/PLF)
   * [Probabilities and Statistics](Semester-3/PS)
+- Semester 4
+  * [Web Programming](Semester-4/WEB)
+  * [Artificial Intelligence](Semester-4/AI)
+  * [Database Management Systems](Semester-4/DBMS)
+- Semester 5
+  * [Formal Languages and Compiler Design](Semester-5/FLCD)
+  * [Parralel and Distributed Programming](Semester-5/PDP)
+  * [Public Key Cryptography](Semester-5/PKC)
+  * [Mobile Applications](Semester-5/MA)
