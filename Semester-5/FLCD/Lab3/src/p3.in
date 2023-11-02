@@ -1,0 +1,8 @@
+num S'
+S <- 0'
+num [ 20 ] NUMERE'
+NUMERE <- [ 1, 2, 3, 5, 7 ]'
+pt ( num I' I <- 0' I <- I + 1 )
+{ S <- S + NUMERE [ I ]' }
+scr ( S )'
+st

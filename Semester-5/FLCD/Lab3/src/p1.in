@@ -1,0 +1,7 @@
+num A' num B' num C' num M'
+cit ( A )' cit ( B )' cit ( C )'
+dc A be B si dc A be C { M <- A' }
+dc B be C si dc B be A { M <- B' }
+dc C be A si dc C be B { M <- C' }
+scr ( M )'
+st
