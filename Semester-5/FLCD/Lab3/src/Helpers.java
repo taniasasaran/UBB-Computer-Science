@@ -16,4 +16,14 @@ public class Helpers {
         }
         return lines;
     }
+
+    public static void writeToFile(String filename, String content) {
+        try {
+            java.io.FileWriter myWriter = new java.io.FileWriter(filename);
+            myWriter.write(content);
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

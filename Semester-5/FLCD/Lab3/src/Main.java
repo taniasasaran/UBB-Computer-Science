@@ -2,17 +2,23 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<String> tokens = Helpers.readFileToList("src/tokens.in");
-        ArrayList<String> programLines = Helpers.readFileToList("src/p1.in");
-//        ArrayList<String> programLines = Helpers.readFileToList("src/p2.in");
-//        ArrayList<String> programLines = Helpers.readFileToList("src/p3.in");
-//        ArrayList<String> programLines = Helpers.readFileToList("src/p1err.in");
-        LexicAnalyzer lexicAnalyzer = new LexicAnalyzer(programLines, tokens);
-        try{
-            lexicAnalyzer.run();
+        String fileIN, fileOUT;
+        fileIN = "resources/p1.in";
+        fileOUT = "output/p1.out";
+        fileIN = "resources/p2.in";
+        fileOUT = "output/p2.out";
+        fileIN = "resources/p3.in";
+        fileOUT = "output/p3.out";
+        fileIN = "resources/p1err.in";
+        fileOUT = "output/p1err.out";
 
-            System.out.println(lexicAnalyzer.getPIF());
-            System.out.println(lexicAnalyzer.getSymbolTable());
+        try{
+            ArrayList<String> tokens = Helpers.readFileToList("resources/tokens.in");
+            ArrayList<String> programLines = Helpers.readFileToList(fileIN);
+            LexicAnalyzer lexicAnalyzer = new LexicAnalyzer(programLines, tokens);
+
+            String result = lexicAnalyzer.run();
+            Helpers.writeToFile(fileOUT, result + "\n\nST\n" + lexicAnalyzer.getSymbolTable() + "\n\nPIF\n" + lexicAnalyzer.getPIF());
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

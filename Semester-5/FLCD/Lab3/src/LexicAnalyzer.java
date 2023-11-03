@@ -73,7 +73,7 @@ public class LexicAnalyzer {
         return false;
     }
 
-    public void run() {
+    public String run() {
         ArrayList<ArrayList<String>> toks = detect();
         for (int i = 0; i < toks.size(); i++) {
             for (int j = 0; j<toks.get(i).size(); j++) {
@@ -87,11 +87,11 @@ public class LexicAnalyzer {
                     Pair position = symbolTable.add(token);
                     pif.add("const", position);
                 } else {
-                    throw new RuntimeException("Lexical error on line " + ( i + 1 ) + " token number " + ( j + 1 )
+                    return ("Lexical error on line " + ( i + 1 ) + " token number " + ( j + 1 )
                             + ": " + token + " is not a valid token");
                 }
             }
         }
-        System.out.println("Program is lexically correct.");
+        return "Program is lexically correct.";
     }
 }
