@@ -1,0 +1,19 @@
+Lexical error on line 1 token number 14: x is not a valid token
+
+ST
+SymbolTable { elements=[[A], [B], [C, M], [], []], size = 5 }
+
+PIF
+("num", (-1, -1))
+(id, (0, 0))
+("'", (-1, -1))
+("num", (-1, -1))
+(id, (1, 0))
+("'", (-1, -1))
+("num", (-1, -1))
+(id, (2, 0))
+("'", (-1, -1))
+("num", (-1, -1))
+(id, (2, 1))
+("'", (-1, -1))
+("num", (-1, -1))
