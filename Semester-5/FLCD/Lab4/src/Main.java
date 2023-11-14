@@ -15,18 +15,22 @@ public class Main {
         try{
             ArrayList<String> tokens = Helpers.readFileToList("resources/tokens.in");
             ArrayList<String> programLines = Helpers.readFileToList(fileIN);
-            LexicAnalyzer lexicAnalyzer = new LexicAnalyzer(programLines, tokens);
+            FiniteAutomata integersFA = new FiniteAutomata("resources/integer.in");
+            FiniteAutomata identifiersFA = new FiniteAutomata("resources/identifier.in");
+
+            LexicAnalyzer lexicAnalyzer = new LexicAnalyzer(programLines, tokens, integersFA, identifiersFA);
 
             String result = lexicAnalyzer.run();
             Helpers.writeToFile(fileOUT, result + "\n\nST\n" + lexicAnalyzer.getSymbolTable() + "\n\nPIF\n" + lexicAnalyzer.getPIF());
 
             FiniteAutomata finiteAutomata = new FiniteAutomata("resources/fa.in");
-            System.out.println(finiteAutomata.isDeterministic());
+            assert finiteAutomata.isDeterministic();
             finiteAutomata.displayThings();
-            System.out.println(finiteAutomata.checkAccepted("0"));
-            System.out.println(finiteAutomata.checkAccepted("01"));
-            System.out.println(finiteAutomata.checkAccepted("1"));
-            System.out.println(finiteAutomata.checkAccepted(""));
+//            assert !finiteAutomata.checkAccepted("0");
+//            assert finiteAutomata.checkAccepted("01");
+//            assert finiteAutomata.checkAccepted("1");
+//            assert !finiteAutomata.checkAccepted("");
+
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

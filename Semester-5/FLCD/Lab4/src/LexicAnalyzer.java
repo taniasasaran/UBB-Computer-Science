@@ -6,12 +6,16 @@ public class LexicAnalyzer {
     private PIF pif;
     private ArrayList<String> program;
     private ArrayList<String> tokens;
+    private FiniteAutomata integersFA;
+    private FiniteAutomata identifiersFA;
 
-    public LexicAnalyzer(ArrayList<String> program, ArrayList<String> tokens) {
+    public LexicAnalyzer(ArrayList<String> program, ArrayList<String> tokens, FiniteAutomata integersFA, FiniteAutomata identifiersFA) {
         this.symbolTable = new SymbolTable(5);
         this.pif = new PIF();
         this.program = program;
         this.tokens = tokens;
+        this.integersFA = integersFA;
+        this.identifiersFA = identifiersFA;
     }
 
     public SymbolTable getSymbolTable() {
@@ -57,11 +61,13 @@ public class LexicAnalyzer {
     }
 
     private boolean isIdentifier(String token) {
-        return token.matches("^[A-Z_][A-Z_0-9]*$");
+//        return token.matches("^[A-Z_][A-Z_0-9]*$");
+        return identifiersFA.checkAccepted(token);
     }
 
     private boolean isConstant(String token) {
-        if (token.matches("^0|-?[1-9][0-9]*$")) {
+//        if (token.matches("^0|-?[1-9][0-9]*$")) {
+        if (integersFA.checkAccepted(token)) {
             return true;
         }
         if (token.matches("^\"[a-zA-Z0-9_]*\"$")) {

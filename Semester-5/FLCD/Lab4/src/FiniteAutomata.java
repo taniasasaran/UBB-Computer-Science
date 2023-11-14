@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class FiniteAutomata {
     private final String filename;
@@ -25,7 +26,10 @@ public class FiniteAutomata {
         this.finalStates = Helpers.splitString(lines.get(3));
         for (int i = 4; i < lines.size(); i++) {
             String[] tokens = lines.get(i).split(" ");
-            this.transitions.add(new Transition(tokens[0], tokens[2], tokens[1]));
+            String[] symbols = tokens[1].split(",");
+            for (String symbol: symbols) {
+                this.transitions.add(new Transition(tokens[0], tokens[2], symbol));
+            }
         }
     }
 
@@ -51,7 +55,7 @@ public class FiniteAutomata {
     }
 
 
-    private void printElements(ArrayList<String> elements) {
+    private void printElements(List<String> elements) {
         StringBuilder result = new StringBuilder();
         for (String state : elements) {
             result.append(state);
@@ -90,17 +94,15 @@ public class FiniteAutomata {
         System.out.println("3. Print transitions");
         System.out.println("4. Print initial state");
         System.out.println("5. Print final states");
+        System.out.println("0. Exit");
     }
 
     public void displayThings() {
         while (true) {
             printMenu();
             String input = Helpers.readUserInput("Enter the input: ");
-            if (input.isEmpty()) {
-                System.out.println("The input is empty.");
-                return;
-            }
             switch (input) {
+                case "0" -> { return; }
                 case "1" -> this.printStates();
                 case "2" -> this.printAlphabet();
                 case "3" -> this.printTransitions();
