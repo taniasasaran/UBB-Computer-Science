@@ -1,0 +1,27 @@
+Row | Time: 367ms | 8 threads | matrix size 1000
+Column | Time: 470ms | 8 threads | matrix size 1000
+Kth | Time: 500ms | 8 threads | matrix size 1000
+Row | Time: 449ms | 8 tasks with thread pool | matrix size 1000
+Column | Time: 368ms | 8 tasks with thread pool | matrix size 1000
+Kth | Time: 473ms | 8 tasks with thread pool | matrix size 1000
+
+Row | Time: 1139ms | 2 threads | matrix size 1000
+Column | Time: 1136ms | 2 threads | matrix size 1000
+Kth | Time: 1390ms | 2 threads | matrix size 1000
+Row | Time: 1117ms | 2 tasks with thread pool | matrix size 1000
+Column | Time: 1137ms | 2 tasks with thread pool | matrix size 1000
+Kth | Time: 1328ms | 2 tasks with thread pool | matrix size 1000
+
+Row | Time: 2315ms | 1 threads | matrix size 1000
+Column | Time: 2321ms | 1 threads | matrix size 1000
+Kth | Time: 1901ms | 1 threads | matrix size 1000
+Row | Time: 2325ms | 1 tasks with thread pool | matrix size 1000
+Column | Time: 2356ms | 1 tasks with thread pool | matrix size 1000
+Kth | Time: 1963ms | 1 tasks with thread pool | matrix size 1000
+
+Row | Time: 8ms | 4 threads | matrix size 100
+Column | Time: 2ms | 4 threads | matrix size 100
+Kth | Time: 3ms | 4 threads | matrix size 100
+Row | Time: 3ms | 4 tasks with thread pool | matrix size 100
+Column | Time: 3ms | 4 tasks with thread pool | matrix size 100
+Kth | Time: 3ms | 4 tasks with thread pool | matrix size 100
