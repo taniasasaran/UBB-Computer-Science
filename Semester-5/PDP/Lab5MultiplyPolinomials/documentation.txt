@@ -1,0 +1,23 @@
+The documentation will describe:
+
+the algorithms,
+the synchronization used in the parallelized variants,
+the performance measurements
+
+N - result degree = p1.degree + p2.degree
+
+Classical algorithm - compute each coefficient one by one as sum of multiplications of coefficients
+c(k) = sum( p1(i) * p2(k-i) ) where k=0...N and i=0...k
+
+Karatsuba algorithm - divide the polynomials in two, compute multiplications of polynomials and compute the specified operations with the results
+( (E1*D1) * (x^n) + ((E1 + E0) * (D0 + D1) - (D1*E1) - (D0*E0)) * (x ^ n/2) + E0D0)
+where D1, D0 = upper and lower halves respectively of the first polynomial
+E1, E0 = upper and lower halves respectively of the second polynomial
+
+No synchronization used for karatsuba as it multiplies polynomials
+
+
+Duration for SEQUENTIAL CLASSIC - degree 20000 and 15000: 2.743077 seconds
+Duration for SEQUENTIAL KARATSUBA - degree 20000 and 15000: 4.4918162 seconds
+Duration for PARALLEL CLASSIC - degree 20000 and 15000: 2.487021 seconds
+Duration for PARALLEL KARATSUBA - degree 20000 and 15000: 1.2512346 seconds

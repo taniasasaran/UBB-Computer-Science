@@ -1,0 +1,4 @@
+Duration for SEQUENTIAL CLASSIC - degree 20000 and 15000: 2.743077 seconds
+Duration for SEQUENTIAL KARATSUBA - degree 20000 and 15000: 4.4918162 seconds
+Duration for PARALLEL CLASSIC - degree 20000 and 15000: 2.487021 seconds
+Duration for PARALLEL KARATSUBA - degree 20000 and 15000: 1.2512346 seconds

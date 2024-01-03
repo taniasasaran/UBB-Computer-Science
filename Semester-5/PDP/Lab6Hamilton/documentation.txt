@@ -1,0 +1,52 @@
+the algorithms,
+the synchronization used in the parallelized variants,
+the performance measurements
+
+Graph: directed graph that has the following structure:
+nodes: list of integers
+edges: list of edges (the vertices the current one goes to)
+
+Algorithm: begins to build path from vertex 0
+search - recursive function that has as input the current node and a path and, 
+based on the nodes the current one is linked to, adds each one of them and 
+builds a new thread that calls the search with the new node and new path
+if the path has length equal to nr of vertices and the current node can go to the starting node, then it is a cycle
+if the path has length equal to nr of vertices, then it is not a cycle
+
+no synchronization used
+
+performance:
+
+  - 4 threads -
+Graph size: 13
+Time: 8.0708776s
+Graph with Hamiltonian cycle size: 5
+Time: 0.0022975s
+Graph without Hamiltonian cycle size: 5
+Time: 0.0018744s
+
+Graph size: 14
+Time: 129.5465633s
+Graph with Hamiltonian cycle size: 5
+Time: 0.0024634s
+Graph without Hamiltonian cycle size: 5
+Time: 0.0019267s
+-----------------------------------------------
+  - 8 threads
+Graph size: 14
+Time: 34.2217296s
+Graph with Hamiltonian cycle size: 5
+Time: 0.0021649s
+Graph without Hamiltonian cycle size: 5
+Time: 0.0020448s
+
+Graph{nodes=[0, 1, 2, 3, 4, 5, 6], edges=[[3], [4, 3, 0], [6, 0], [1, 5], [], [0], [5, 4, 0, 1, 3]]}
+Graph size: 7
+Time: 0.0111517s
+Found a cycle: [0, 1, 2, 3, 4, 0]
+Found a cycle: [0, 1, 4, 2, 3, 0]
+Graph with Hamiltonian cycle size: 5
+Time: 0.0069001s
+Found a cycle: [0, 1, 4, 2, 3, 0]
+Graph without Hamiltonian cycle size: 5
+Time: 0.0073992s
