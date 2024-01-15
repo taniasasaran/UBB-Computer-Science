@@ -5,31 +5,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class GraphColoring {
-//    private static final int NUM_VERTICES = 4;
-//    private static final int[][] ADJACENCY_MATRIX = {
-//            {0, 1, 1, 1},
-//            {1, 0, 1, 0},
-//            {1, 1, 0, 1},
-//            {1, 0, 1, 0}
-//    };
     private static final int NUM_VERTICES = 8;
-//    private static final int[][] ADJACENCY_MATRIX = {
-//            {0, 1, 1, 1, 0, 0, 0, 0},
-//            {1, 0, 1, 0, 1, 0, 0, 0},
-//            {1, 1, 0, 0, 0, 1, 0, 0},
-//            {1, 0, 0, 0, 1, 0, 1, 0},
-//            {0, 1, 0, 1, 0, 0, 0, 1},
-//            {0, 0, 1, 0, 0, 0, 1, 0},
-//            {0, 0, 0, 1, 0, 1, 0, 1},
-//            {0, 0, 0, 0, 1, 0, 1, 0}
-//    };
     private static final int[][] ADJACENCY_MATRIX = {
-            {0, 1, 1, 1, 1, 0, 0, 0},
+            {0, 1, 1, 1, 1, 0, 0, 1},
             {1, 0, 1, 1, 0, 1, 0, 0},
             {1, 1, 0, 1, 1, 0, 1, 1},
             {1, 1, 1, 0, 0, 0, 1, 1},
             {1, 0, 1, 0, 0, 1, 0, 1},
-            {0, 1, 0, 1, 1, 0, 1, 1},
+            {0, 1, 0, 0, 1, 0, 1, 1},
             {0, 0, 1, 1, 0, 1, 0, 1},
             {1, 0, 1, 1, 1, 1, 1, 0}
     };
@@ -40,6 +23,8 @@ public class GraphColoring {
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(NUM_VERTICES);
 
+        // start time
+        long startTime = System.currentTimeMillis();
         for (int i = 0; i < NUM_VERTICES; i++) {
             Runnable task = new ColoringTask(i);
             Thread thread = new Thread(task);
@@ -53,6 +38,8 @@ public class GraphColoring {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        // end time
+        long endTime = System.currentTimeMillis();
 
         for (Thread thread : threadList) {
             thread.interrupt();
@@ -60,6 +47,7 @@ public class GraphColoring {
 
         System.out.println("Coloring result: " + ColoringTask.bestColoring);
         System.out.println("Number of colors: " + ColoringTask.numColors);
+        System.out.println("Time taken: " + (endTime - startTime) + "ms");
     }
 
     static class ColoringTask implements Runnable {
