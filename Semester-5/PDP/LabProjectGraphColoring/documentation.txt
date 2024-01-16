@@ -1,0 +1,19 @@
+
+The app implements a parallelized graph coloring algorithm based on the Jones-Plassmann approach.
+The primary classes include Graph, representing an undirected graph, GraphColoringException for handling
+coloring-related exceptions, and GraphColoring containing the parallelized algorithm.
+
+The Graph class allows the creation of graphs from adjacency matrices or by inputting the number of vertices and then
+randomly generating edges and supports basic operations like adding vertices and checking edges.
+
+The GraphColoringException class extends the Exception class and is used to handle exceptions related to graph coloring.
+
+The heart of the project is the GraphColoring class, where the parallelized algorithm is implemented.
+The getGraphColoring method uses parallelization to explore different color combinations efficiently.
+The graphColoringRec function recursively explores possible colorings for each node, utilizing thread
+synchronization for result consistency.
+
+In the Main class, a sample graph is created using an adjacency matrix, and the parallelized algorithm is applied
+to find a valid coloring. The result, whether a solution or an exception, is then printed. The project aims
+to demonstrate the parallelization of the graph coloring algorithm for efficient exploration of color combinations
+in a multithreading environment.

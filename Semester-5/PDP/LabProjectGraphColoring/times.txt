@@ -1,3 +1,28 @@
-Coloring result: [1, 2, 3, 4, 2, 1, 2, 5]
+[0, 1, 2, 3, 4, 4, 1, 2, 0, 1]
+[red, green, blue, yellow, orange, orange, green, blue, red, green]
 Number of colors: 5
-Time taken: 289ms
+Graph vertices: 10
+Number of threads: 8
+Total execution time: 5ms
+
+[0, 4, 1, 2, 2, 0, 3, 4]
+[red, orange, green, blue, blue, red, yellow, orange]
+Number of colors: 5
+Graph vertices: 8
+Number of threads: 8
+Total execution time: 5ms
+
+Number of colors: 36
+Graph vertices: 100
+Number of threads: 8
+Total execution time: 55ms
+
+Number of colors: 215
+Graph vertices: 1000
+Number of threads: 8
+Total execution time: 16942ms
+
+Number of colors: 33
+Graph vertices: 100
+Number of threads: 4
+Total execution time: 47ms

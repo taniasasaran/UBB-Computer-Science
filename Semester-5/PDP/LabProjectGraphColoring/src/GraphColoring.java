@@ -1,112 +1,93 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class GraphColoring {
-    private static final int NUM_VERTICES = 8;
-    private static final int[][] ADJACENCY_MATRIX = {
-            {0, 1, 1, 1, 1, 0, 0, 1},
-            {1, 0, 1, 1, 0, 1, 0, 0},
-            {1, 1, 0, 1, 1, 0, 1, 1},
-            {1, 1, 1, 0, 0, 0, 1, 1},
-            {1, 0, 1, 0, 0, 1, 0, 1},
-            {0, 1, 0, 0, 1, 0, 1, 1},
-            {0, 0, 1, 1, 0, 1, 0, 1},
-            {1, 0, 1, 1, 1, 1, 1, 0}
-    };
-    private static final int MAX_NUM_COLORS = NUM_VERTICES;
+    public static Vector<Integer> getGraphColoring(int threadsNo, Graph graph, Vector<Integer> colors) throws GraphColoringException {
+        Vector<Integer> codes = new Vector<>();
 
-    private static List<Thread> threadList = new ArrayList<>();
+        int codesNo = colors.size();
+        Vector<Integer> partialCodes = new Vector<>(Collections.nCopies(graph.getNodesNo(), 0));
+        Lock lock = new ReentrantLock();
 
-    public static void main(String[] args) {
-        ExecutorService executorService = Executors.newFixedThreadPool(NUM_VERTICES);
+        graphColoringRec(new AtomicInteger(threadsNo), 0, graph, codesNo, partialCodes, lock, codes);
 
-        // start time
-        long startTime = System.currentTimeMillis();
-        for (int i = 0; i < NUM_VERTICES; i++) {
-            Runnable task = new ColoringTask(i);
-            Thread thread = new Thread(task);
-            threadList.add(thread);
-            executorService.execute(thread);
+        // no solution
+        if (codes.isEmpty()) {
+            throw new GraphColoringException("No solution found!");
         }
 
-        try {
-            executorService.shutdown();
-            executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        // end time
-        long endTime = System.currentTimeMillis();
-
-        for (Thread thread : threadList) {
-            thread.interrupt();
-        }
-
-        System.out.println("Coloring result: " + ColoringTask.bestColoring);
-        System.out.println("Number of colors: " + ColoringTask.numColors);
-        System.out.println("Time taken: " + (endTime - startTime) + "ms");
+        //solution
+        return codes;
     }
 
-    static class ColoringTask implements Runnable {
-        private int vertex;
-        static volatile List<Integer> bestColoring = new ArrayList<>();
-        static int numColors;
+    private static void graphColoringRec(AtomicInteger threadsNo, int node, Graph graph, int codesNo, Vector<Integer> partialCodes, Lock lock, Vector<Integer> codes) {
+        //solution already found
+        if (!codes.isEmpty())
+            return;
 
-        ColoringTask(int vertex) {
-            this.vertex = vertex;
-        }
+        //solution
+        if (node + 1 == graph.getNodesNo()) {
+            if (isCodeValid(node, partialCodes, graph)) {
+                lock.lock();
 
-        @Override
-        public void run() {
-            List<Integer> currentColoring = new ArrayList<>();
-            exploreColoring(vertex, currentColoring);
-        }
+                if (codes.isEmpty()) {
+                    codes.addAll(partialCodes);
+                }
 
-        private void exploreColoring(int vertex, List<Integer> currentColoring) {
-            if (Thread.interrupted()) {
-                return;
+                lock.unlock();
             }
 
-            for (int color = 1; color <= MAX_NUM_COLORS; color++) {
-                if (vertex == 3) {
-                    System.out.println("Thread " + Thread.currentThread().getId() + " exploring coloring " + currentColoring);
-                }
-                if (isSafe(vertex, currentColoring, color)) {
-                    currentColoring.add(color);
-
-                    if (vertex == NUM_VERTICES - 1) {
-                        // All vertices colored successfully, check if it's the best coloring so far
-                        updateBestColoring(currentColoring);
-                    } else {
-                        // Explore next vertex
-                        exploreColoring(vertex + 1, currentColoring);
-                    }
-
-                    currentColoring.remove(currentColoring.size() - 1);
-                }
-            }
+            return;
         }
 
-        private boolean isSafe(int vertex, List<Integer> currentColoring, int color) {
-            for (int i = 0; i < NUM_VERTICES; i++) {
-                if (ADJACENCY_MATRIX[vertex][i] == 1 && currentColoring.size() > i && currentColoring.get(i) == color) {
-                    return false;
-                }
-            }
-            return true;
-        }
+        //candidate codes for next node
+        int nextNode = node + 1;
 
-        private void updateBestColoring(List<Integer> currentColoring) {
-            synchronized (bestColoring) {
-                if (bestColoring.isEmpty() || currentColoring.size() > bestColoring.size()) {
-                    bestColoring.clear();
-                    bestColoring.addAll(currentColoring);
-                    numColors = bestColoring.stream().max(Integer::compareTo).get();
+        List<Thread> threads = new ArrayList<>();
+        List<Integer> validCodes = new ArrayList<>();
+
+        for (int code = 0; code < codesNo; code++) {
+            partialCodes.set(nextNode, code);
+
+            if (isCodeValid(nextNode, partialCodes, graph)) {
+
+                if (threadsNo.getAndDecrement() > 0) {
+                    Vector<Integer> nextPartialCodes = new Vector<>(partialCodes);
+
+                    Thread thread = new Thread(() -> graphColoringRec(threadsNo, nextNode, graph, codesNo, nextPartialCodes, lock, codes));
+                    thread.start();
+                    threads.add(thread);
+                } else {
+                    validCodes.add(code);
                 }
             }
         }
+
+        //join threads
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
+            }
+        }
+
+        //sequential
+        for (int code : validCodes) {
+            partialCodes.set(nextNode, code);
+            Vector<Integer> nextPartialCodes = new Vector<>(partialCodes);
+
+            graphColoringRec(threadsNo, nextNode, graph, codesNo, nextPartialCodes, lock, codes);
+        }
+    }
+
+    private static boolean isCodeValid(int node, Vector<Integer> codes, Graph graph) {
+        for (int current = 0; current < node; current++)
+            if ((graph.isEdge(node, current) || graph.isEdge(current, node)) && codes.get(node) == codes.get(current).intValue())
+                return false;
+
+        return true;
     }
 }
