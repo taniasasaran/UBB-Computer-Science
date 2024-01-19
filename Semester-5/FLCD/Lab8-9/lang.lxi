@@ -1,0 +1,73 @@
+%{
+#include "y.tab.h"
+%}
+
+%option noyywrap
+
+LITERAMAJ	    [A-Z]
+LITERA          [A-Za-z]
+CIFRA	        [0-9]
+CIFRA_NONZERO   [1-9]
+IDENTIFIER	    ({LITERAMAJ}|_)({LITERAMAJ}|{CIFRA}|_)*
+NUMAR	        [-]?{CIFRA_NONZERO}{CIFRA}*|0
+COMMENT		    \$.*$
+WHITESPACE      [\n\t\r ]
+STRING		    \"({LITERA}|{CIFRA}|_)*\"
+BOOLEAN         true|false
+CARACTER        \"({LITERA}|{CIFRA}|_)\"
+ARRAY           NUM_ARRAY_CONST | BUL_ARRAY_CONST | STRING_ARRAY_CONST | LIT_ARRAY_CONST
+NUM_ARRAY_CONST     "[" {NUMAR}(,{NUMAR}) "]"
+BUL_ARRAY_CONST     "[" {BOOLEAN}(,{BOOLEAN}) "]"
+STRING_ARRAY_CONST  "[" {STRING}(,{STRING}) "]"
+LIT_ARRAY_CONST     "[" {CARACTER}(,{CARACTER}) "]"
+CONSTANT        {NUMAR}|{BOOLEAN}|{STRING}|{CARACTER}
+
+%% 
+
+{WHITESPACE} {}
+{COMMENT} {}
+"nu" { return NOT; }
+"+" { return PLUS; }
+"-" { return MINUS; }
+"*" { return MULT; }
+"/" { return DIV; }
+"%" { return MOD; }
+"ee" { return EQUAL;  }
+"nee" { return NOT_EQUAL; }
+"ss" { return LT; }
+"se" { return LE; }
+"bb" { return GT; }
+"be" { return GE; }
+"<-" { return ASSIGNMENT; }
+"si" { return AND; }
+"sau" { return OR; }
+"{" { return L_BRACKET; }
+"}" { return R_BRACKET; }
+"(" { return L_PARANTHESIS; }
+")" { return R_PARANTHESIS; }
+"[" { return L_SQUARE_BRACKET; }
+"]" { return R_SQUARE_BRACKET; }
+"," { return COMMA; }
+"'" { return APOSTROPHE; }
+":" { return COLON; }
+"." { return PERIOD; }
+"st" { return STOP; }
+"dc" { return IF; }
+"alfel" { return ELSE; }
+"cat" { return WHILE; }
+"pt" { return FOR; }
+"print" { return PRINT; }
+"cit" { return READ; }
+"num" { return INT; }
+"bul" { return BOOL; }
+"string" { return STRING; }
+"lit" { return CHAR; }
+"array" { return ARRAY; }
+{BOOLEAN} { return BOOL_CONSTANT; }
+{IDENTIFIER} { return IDENTIFIER; }
+{NUMAR} { return INT_CONSTANT; }
+{CARACTER} { return CHAR_CONSTANT; }
+{STRING} { return STRING_CONSTANT; }
+. { printf("UNKNOWN "); ECHO; printf("\n");exit(1); }
+
+%% 
