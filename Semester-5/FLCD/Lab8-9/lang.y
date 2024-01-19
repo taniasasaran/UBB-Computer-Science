@@ -107,7 +107,7 @@
 %type<row> string_expression
 
 %%
-accept: program                              { display($1, 0); free_row_entry($1); }
+accept: program    { if ($1 != NULL) { display($1, 0); free_row_entry($1); } }
 
 program: stmtlist STOP                        { $$ = cons("program", $1); $1->next_sibling = $2; }
       ;
