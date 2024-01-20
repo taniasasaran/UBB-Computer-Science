@@ -1,0 +1,25 @@
+Algorithm:
+(a=firsthalf(P1); b=secondhalf(P1); c=firsthalf(P2); d=secondhalf(P2))
+For the karatsuba implementation, the mpi program creates 3 threads that each compute the following polynomials:
+1 - a*c
+2 - b*d
+3 - (a+b)*(c+d) (classic polynomial multiplication)
+Then, the main program(rank=0) computes the final polynomial that results from the karatsuba operations formula
+For the classic implementation, each process computes a portion of the polynomial multiplication, and then the 
+results are communicated between processes using MPI_Ssend and MPI_Recv. The final result is printed by the root process (rank 0). 
+
+Distribution and Communication:
+The main program sends each thread the coefficients of each polynomial using MPI_Ssend 
+and then receives the result using MPI_Recv. No synchronization methods are needed.
+
+Performance Measurements:
+15k coefficients
+
+mpi: karatsuba 0.33
+     classic 0.42
+
+parallel: karatsuba 0.9
+	  classic 1.6
+
+sequential: karatsuba 2.6
+	    classic 1.88

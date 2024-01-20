@@ -1,0 +1,25 @@
+DSMVariable is a class representing a single shared variable in the DSM mechanism.
+It has an int value representing the value of the variable.
+Set<Integer> subscribers keeps track of the nodes (processes) subscribed to this variable.
+
+DSMLibrary is the main class representing the distributed shared memory library.
+It contains a static Map<Integer, DSMVariable> variables to store all shared variables, where the key is the variable ID.
+createVariable(int variableId) creates a new shared variable with the given ID.
+read(int variableId, int nodeId) reads the value of a variable with the specified ID at a particular node. It checks if the node is subscribed to the variable and returns the value if authorized, otherwise returns -1.
+write(int variableId, int value, int nodeId) writes a new value to the specified variable at a particular node. It checks if the node is subscribed to the variable and updates the value. After updating, it notifies all subscribers.
+subscribe(int variableId, int nodeId) and unsubscribe(int variableId, int nodeId) add and remove subscribers to a variable, respectively.
+notifySubscribers(int variableId) notifies all subscribers of a variable about a change.
+
+MainProgram is a simple example to demonstrate the usage of the DSM library.
+Three nodes (node1, node2, node3) are assumed with IDs 1, 2, and 3.
+Two variables with IDs 1 and 2 are created.
+Nodes subscribe to variables using the subscribe method. Node 1 subscribes to variable 1, and nodes 2 and 3 subscribe to variables 1 and 2, respectively.
+
+Values are written to and read from variables using the write and read methods.
+The final values are printed to demonstrate the read operation.
+
+In the compareAndExchange method I use the synchronized keyword to ensure atomicity, preventing interference from other threads (nodes) during the comparison and exchange operation.
+It checks if the node is authorized to perform the operation based on subscriptions.
+It compares the current value of the variable with the expected value.
+If the values match, it updates the variable with the new value, notifies subscribers, and returns true to indicate a successful exchange.
+If the values don't match, it returns false to indicate that the exchange failed.
